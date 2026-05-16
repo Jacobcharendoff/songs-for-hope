@@ -1,0 +1,111 @@
+/* ============================================================
+   IMAGE FALLBACKS — render beautifully if .b64 images missing
+   ============================================================ */
+
+/* Inline SVG logo replacement — main.js sets data-img-loaded when fetch succeeds */
+.hero-stage img[data-img="logo"] {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c94fff 35%, #5e8fff 70%, #2dd4bf 100%);
+  background-size: 200% 200%;
+  animation: gradShift 8s ease infinite;
+  border-radius: 6px;
+  display: inline-block;
+  position: relative;
+}
+.hero-stage img[data-img="logo"]:not([src]):after,
+.hero-stage img[data-img="logo"][src=""]:after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1.5px solid #fff;
+  border-radius: 2px;
+}
+
+/* Hero cover artwork fallback — Apple-Intelligence gradient tile with title overlay */
+.hero-cover {
+  position: relative;
+  min-height: clamp(280px, 38vw, 460px);
+  border-radius: 22px;
+  overflow: hidden;
+}
+.hero-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255,107,157,0.55) 0%, transparent 42%),
+    radial-gradient(circle at 78% 22%, rgba(201,79,255,0.50) 0%, transparent 45%),
+    radial-gradient(circle at 22% 82%, rgba(45,212,191,0.40) 0%, transparent 48%),
+    radial-gradient(circle at 82% 78%, rgba(94,143,255,0.50) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(251,191,36,0.30) 0%, transparent 55%),
+    linear-gradient(135deg, #0a0a0a 0%, #1a0533 50%, #050816 100%);
+  background-size: 300% 300%;
+  animation: gradShift 14s ease infinite;
+  z-index: 0;
+}
+.hero-cover::after {
+  content: "SONGS\AFOR HOPE\A2026";
+  white-space: pre;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.2vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #fff;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-cover img {
+  position: relative;
+  z-index: 2;
+}
+.hero-cover img[src=""],
+.hero-cover img:not([src]) {
+  opacity: 0;
+}
+
+/* Artist + venue background fallbacks — main.js sets style.backgroundImage on success */
+.artist-bg:not([style*="background-image"]),
+.artist-bg[style=""] {
+  background:
+    radial-gradient(ellipse at 25% 30%, rgba(255,107,157,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 70%, rgba(94,143,255,0.20) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(201,79,255,0.12) 0%, transparent 55%),
+    linear-gradient(135deg, #050810 0%, #14091f 50%, #08111c 100%);
+  background-size: 300% 300%;
+  animation: gradShift 18s ease infinite;
+}
+.est-poster:not([style*="background-image"]),
+.est-poster[style=""] {
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,107,157,0.55) 0%, transparent 45%),
+    radial-gradient(circle at 70% 30%, rgba(201,79,255,0.50) 0%, transparent 45%),
+    radial-gradient(circle at 25% 75%, rgba(45,212,191,0.40) 0%, transparent 50%),
+    radial-gradient(circle at 75% 80%, rgba(94,143,255,0.50) 0%, transparent 45%),
+    linear-gradient(135deg, #0a0a0a 0%, #150a25 100%);
+  background-size: 280% 280%;
+  animation: gradShift 12s ease infinite;
+}
+.venue-bg:not([style*="background-image"]),
+.venue-bg[style=""] {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255,107,157,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(94,143,255,0.14) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(20,20,30,0.6) 0%, transparent 60%),
+    linear-gradient(180deg, #050505 0%, #0e0e16 60%, #050505 100%);
+  background-size: 200% 200%;
+  animation: gradShift 22s ease infinite;
+}
+
+@keyframes gradShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
