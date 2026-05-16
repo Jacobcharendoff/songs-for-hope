@@ -9,6 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="./fallbacks.css">
+<style>
+/* Bob section styling */
+.bob-section { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; margin: 48px 0 32px; padding: 32px; border-radius: 18px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); }
+.bob-photo { width: 220px; height: 220px; border-radius: 14px; object-fit: cover; background: linear-gradient(135deg, #ff6b9d 0%, #c94fff 35%, #5e8fff 70%, #2dd4bf 100%); background-size: 200% 200%; animation: gradShift 12s ease infinite; display: block; }
+.bob-photo[src=""], .bob-photo:not([src]) { position: relative; }
+.bob-photo[src=""]::after, .bob-photo:not([src])::after { content: "BC"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 64px; color: rgba(255,255,255,0.85); letter-spacing: -0.02em; }
+.bob-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 6px; color: #fff; }
+.bob-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-2, #8a8a99); margin-bottom: 18px; }
+.bob-bio { font-size: 15px; line-height: 1.6; color: var(--grey-1, #c0c0cc); max-width: 560px; margin-bottom: 22px; }
+.bob-meta { display: flex; flex-wrap: wrap; gap: 24px; font-size: 13px; color: var(--grey-2, #8a8a99); }
+.bob-meta span strong { color: #fff; font-weight: 600; margin-right: 6px; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+@media (max-width: 720px) { .bob-section { grid-template-columns: 1fr; text-align: left; } .bob-photo { width: 140px; height: 140px; } }
+</style>
 </head>
 <body>
 
@@ -40,9 +53,9 @@
     </div>
     <div class="hero-grid-bottom reveal reveal-2">
       <div class="hero-set">
-        <div><div class="k">Date</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-cal"/></svg>February 2026<em> · TBA</em></div></div>
+        <div><div class="k">Date</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-cal"/></svg>November 14, 2026</div></div>
         <div><div class="k">Venue</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-pin"/></svg>The Drake Underground</div></div>
-        <div><div class="k">City</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-pin"/></svg>Toronto<em> · West Queen West</em></div></div>
+        <div><div class="k">City</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-pin"/></svg>Toronto<em> · Queen Street West</em></div></div>
         <div><div class="k">Lineup</div><div class="v"><svg width="18" height="18"><use href="./icons.svg#i-music"/></svg>EST · Sisters &amp; Brothers</div></div>
       </div>
       <div class="hero-actions">
@@ -95,7 +108,7 @@
       <div>
         <div class="kicker reveal"><span class="grad-dot"></span>03 · The Night</div>
         <h2 class="reveal reveal-1">A live set<br>with <em>purpose.</em></h2>
-        <p class="reveal reveal-2" style="font-size:20px; color:var(--grey-2); line-height:1.5; margin-bottom:32px; max-width:440px;">An intimate evening of music, community, and impact. Doors at 7. Curfew when the room says so.</p>
+        <p class="reveal reveal-2" style="font-size:20px; color:var(--grey-2); line-height:1.5; margin-bottom:32px; max-width:440px;">An intimate evening of music, community, and impact. November 14, 2026. Doors at 7. Curfew when the room says so.</p>
         <p class="reveal reveal-3" style="font-size:15px; color:var(--grey-2); line-height:1.6; max-width:440px;">Two acts. One stage. A bar that knows what it's doing. And every ticket, every sponsorship feeds the year that follows.</p>
       </div>
       <div class="reveal reveal-2">
@@ -296,13 +309,13 @@
   <div class="wrap">
     <div class="kicker reveal" style="color:var(--grey-3);"><span class="grad-dot"></span>09 · The Room</div>
     <h2 class="reveal reveal-1">The Drake<br><em>Underground.</em></h2>
-    <p class="sub reveal reveal-2">One of Toronto's most iconic intimate performance spaces — atmospheric, acoustically rich, designed for nights you remember.</p>
+    <p class="sub reveal reveal-2">One of Toronto's most iconic intimate performance spaces — atmospheric, acoustically rich, designed for nights you remember. November 14, 2026.</p>
     <div class="venue-specs reveal reveal-3">
       <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-mic"/></svg></div><div><div class="vs-k">Capacity</div><div class="vs-v">Intimate &amp; world-class</div></div></div>
       <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-wave"/></svg></div><div><div class="vs-k">Acoustics</div><div class="vs-v">Exceptional production quality</div></div></div>
       <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-glass"/></svg></div><div><div class="vs-k">Hospitality</div><div class="vs-v">Full bar &amp; service</div></div></div>
       <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-star"/></svg></div><div><div class="vs-k">Visibility</div><div class="vs-v">Networking &amp; sponsor exposure</div></div></div>
-      <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-pin"/></svg></div><div><div class="vs-k">Location</div><div class="vs-v">West Queen West, Toronto</div></div></div>
+      <div class="spec"><div class="spec-ico"><svg><use href="./icons.svg#i-pin"/></svg></div><div><div class="vs-k">Location</div><div class="vs-v">Queen Street West, Toronto</div></div></div>
     </div>
   </div>
 </section>
@@ -408,22 +421,32 @@
     <div class="kicker center reveal" style="color:var(--grey-3);"><span class="grad-dot"></span>11 · One Last Thing</div>
     <h2 class="reveal reveal-1">Become a <em>sponsor.</em></h2>
     <p class="sub reveal reveal-2">Ready to make a difference? Reach out to discuss how we make your partnership work — for the night, for the year, for the work.</p>
-    <div class="close-actions reveal reveal-3">
+
+    <div class="bob-section reveal reveal-3">
+      <img src="" data-img="bob" alt="Bob Charendoff" class="bob-photo">
+      <div class="bob-content">
+        <div class="bob-title">Bob Charendoff</div>
+        <div class="bob-sub">Corporate &amp; Donor Relations · Special Projects, Seeds of Hope Foundation</div>
+        <p class="bob-bio">Six years at Seeds of Hope, building the partnerships that fund the meals, the shelter, and the housing. Bob has helped pull the operation through stretches when half of Toronto's food banks closed — and kept the work going for the people most cities had stopped seeing.</p>
+        <div class="bob-meta">
+          <span><strong>Email</strong> bobcharendoff@gmail.com</span>
+          <span><strong>Phone</strong> 416-300-9498</span>
+          <span><strong>Web</strong> www.seedsofhope.ca</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="close-actions reveal reveal-4">
       <a href="mailto:bobcharendoff@gmail.com" class="btn btn-grad">Email Bob <span class="arrow">→</span></a>
       <a href="tel:+14163009498" class="btn btn-ghost">Call 416-300-9498</a>
-    </div>
-    <div class="vcard reveal reveal-4">
-      <div class="v-block"><div class="vc-k">Your contact</div><div class="vc-v name">Bob Charendoff</div><div class="vc-sub">Director of Fundraising</div></div>
-      <div class="v-block"><div class="vc-k">Email</div><div class="vc-v">bobcharendoff@gmail.com</div></div>
-      <div class="v-block"><div class="vc-k">Web</div><div class="vc-v">www.seedsofhope.ca</div></div>
     </div>
   </div>
 </section>
 
 <section class="footer">
   <div class="wrap">
-    <div>Seeds of Hope Foundation · Songs For Hope 2026</div>
-    <div>The Drake Underground · West Queen West · Toronto</div>
+    <div>Seeds of Hope Foundation · Songs For Hope 2026 · November 14, 2026</div>
+    <div>The Drake Underground · Queen Street West · Toronto</div>
   </div>
 </section>
 
