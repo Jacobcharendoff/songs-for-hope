@@ -1,5 +1,32 @@
 (function(){
+  // Async image loader — fetches base64-encoded image data and inflates to data: URIs
+  const types = {logo:'png', cover:'jpg', opener:'jpg', headline:'jpg', venue:'jpg'};
+  async function loadOne(name){
+    const r = await fetch('./images/' + name + '.b64', {cache:'force-cache'});
+    if(!r.ok) return null;
+    const b64 = (await r.text()).trim();
+    return 'data:image/' + types[name] + ';base64,' + b64;
+  }
+  const cache = {};
+  async function applyImages(){
+    const need = new Set();
+    document.querySelectorAll('[data-img]').forEach(el => need.add(el.dataset.img));
+    document.querySelectorAll('[data-bg]').forEach(el => need.add(el.dataset.bg));
+    const results = await Promise.all([...need].map(async n => [n, await loadOne(n)]));
+    results.forEach(([n,v]) => { if(v) cache[n] = v; });
+    document.querySelectorAll('[data-img]').forEach(el => {
+      if(cache[el.dataset.img]) el.src = cache[el.dataset.img];
+    });
+    document.querySelectorAll('[data-bg]').forEach(el => {
+      if(cache[el.dataset.bg]) el.style.backgroundImage = "url('" + cache[el.dataset.bg] + "')";
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyImages);
+  } else { applyImages(); }
+})();
 
+(function(){
   // Scroll reveal
   const els = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries=>{
@@ -52,7 +79,7 @@
   }, {threshold: 0.4});
   bars.forEach(el => bio.observe(el));
 
-  // Dot viz — 200 dots; lit dots represent the share in emergency shelter
+  // Dot viz fill — 200 dots; lit dots represent the share in emergency shelter
   document.querySelectorAll('.dot-viz').forEach(grid => {
     if(grid.children.length) return;
     const total = 200;
@@ -86,5 +113,4 @@
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
-
 })();
