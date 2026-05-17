@@ -1,12 +1,15 @@
 (function(){
   // Async image loader — fetches base64-encoded image data and inflates to data: URIs
-  const types = {logo:'png', cover:'jpg', opener:'jpg', headline:'jpg', venue:'jpg', bob:'jpg'};
+  // MIME types: 'png' is correct, JPGs MUST use 'jpeg' (not 'jpg') for strict browsers
+  const types = {logo:'png', cover:'jpeg', opener:'jpeg', headline:'jpeg', venue:'jpeg', bob:'jpeg'};
   async function loadOne(name){
-    const r = await fetch('./images/' + name + '.b64', {cache:'force-cache'});
-    if(!r.ok) return null;
-    const b64 = (await r.text()).trim();
-    if(b64.length < 200) return null;
-    return 'data:image/' + types[name] + ';base64,' + b64;
+    try {
+      const r = await fetch('./images/' + name + '.b64', {cache:'force-cache'});
+      if(!r.ok) return null;
+      const b64 = (await r.text()).trim();
+      if(b64.length < 200) return null;
+      return 'data:image/' + types[name] + ';base64,' + b64;
+    } catch(e) { return null; }
   }
   const cache = {};
   async function applyImages(){
