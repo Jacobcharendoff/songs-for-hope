@@ -1542,6 +1542,51 @@ img{max-width:100%;display:block;}
   background: rgba(0,0,0,.025);
 }
 .pp-logo:hover{ opacity: 1; background: rgba(0,0,0,.045); }
+.pp-track{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  margin: 56px auto 0;
+  max-width: 720px;
+  padding: 32px 24px;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  background: rgba(0,0,0,.015);
+}
+.ppt-stat{ text-align: center; min-width: 140px; }
+.ppt-num{
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  color: #1d1d1f;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.ppt-num.grad{
+  background: var(--grad-ai, linear-gradient(120deg, #FF2D92, #AF52DE, #5856D6, #00C7BE));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-drift 8s ease-in-out infinite;
+}
+.ppt-label{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--grey-1);
+}
+.ppt-divider{
+  width: 1px;
+  height: 56px;
+  background: rgba(0,0,0,.1);
+}
+@media (max-width: 560px){
+  .pp-track{ flex-direction: column; gap: 24px; padding: 24px;}
+  .ppt-divider{ width: 56px; height: 1px;}
+}
 @media (max-width: 960px){
   .pp-grid{grid-template-columns: repeat(3, 1fr); gap: 14px;}
 }
@@ -1916,6 +1961,38 @@ img{max-width:100%;display:block;}
   display:flex;
   align-items:center;
   gap:10px;
+}
+.partnership-receipts{
+  margin-top: 48px;
+  padding: 36px 32px;
+  background: var(--white, #fff);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.prr-item .prr-k{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--grey-1);
+  margin-bottom: 10px;
+}
+.prr-item .prr-v{
+  font-size: 14px;
+  line-height: 1.55;
+  color: #1d1d1f;
+}
+.prr-mono{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .03em;
+  color: var(--grey-1);
+}
+@media (max-width: 760px){
+  .partnership-receipts{ grid-template-columns: 1fr; gap: 24px; padding: 28px; }
 }
 .supporter-line strong:before{
   content:'';
@@ -2633,6 +2710,18 @@ img{max-width:100%;display:block;}
       <div class="pp-logo">Cohen&nbsp;Homes</div>
       <div class="pp-logo">Signet&nbsp;Group</div>
     </div>
+
+    <div class="pp-track reveal reveal-4">
+      <div class="ppt-stat">
+        <div class="ppt-num">$41,000</div>
+        <div class="ppt-label">Raised in 2025</div>
+      </div>
+      <div class="ppt-divider"></div>
+      <div class="ppt-stat ppt-target">
+        <div class="ppt-num grad">$50,000</div>
+        <div class="ppt-label">Target for 2026</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2758,6 +2847,21 @@ img{max-width:100%;display:block;}
     <div class="supporter-line reveal reveal-3">
       <strong>Supporter · $1,000</strong>
       <div>Digital marketing recognition · Social media shout-out · Name listed in event program</div>
+    </div>
+
+    <div class="partnership-receipts reveal reveal-4">
+      <div class="prr-item">
+        <div class="prr-k">Tax status</div>
+        <div class="prr-v">Charitable receipts issued for the full sponsorship amount.</div>
+      </div>
+      <div class="prr-item">
+        <div class="prr-k">Registered charity</div>
+        <div class="prr-v">Seeds of Hope Foundation<br><span class="prr-mono">CRA #13929 8830 RR 0001</span></div>
+      </div>
+      <div class="prr-item">
+        <div class="prr-k">Track record</div>
+        <div class="prr-v">$41,000 raised in 2025. Targeting $50,000 in 2026 — your partnership closes the gap.</div>
+      </div>
     </div>
   </div>
 </section>
