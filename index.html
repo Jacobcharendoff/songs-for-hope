@@ -926,25 +926,47 @@ img{max-width:100%;display:block;}
 .stat-card.peak .stat-tag{color:var(--white); border-color:rgba(255,255,255,.2);}
 .stat-card.peak .bar-track{background:rgba(255,255,255,.1);}
 
-/* Big dot-grid visual for "18,000 people" */
-.dot-viz{
-  margin-top:24px;
-  padding:18px 0;
-  display:grid;
-  grid-template-columns: repeat(40, 1fr);
-  gap:3px;
+/* Toronto map visual for "18,000 people" — geographic placement, not random grid */
+.toronto-viz{
+  margin-top:28px;
+  width:100%;
+  max-width:920px;
+  height:auto;
+  display:block;
 }
-.dot-viz .d{
-  aspect-ratio:1;
-  background:var(--grey-3);
-  border-radius:1px;
-  opacity:.4;
+.toronto-land{
+  fill:#f5f5f7;
+  stroke:#d8d8da;
+  stroke-width:1.4;
 }
-.dot-viz .d.lit{
-  background: var(--grad-warm);
-  background-size:200% 200%;
+.toronto-island{
+  fill:#f5f5f7;
+  stroke:#d8d8da;
+  stroke-width:1;
+}
+.toronto-cardinal,
+.toronto-water,
+.toronto-place{
+  font-family:'JetBrains Mono', monospace;
+  font-size:9px;
+  letter-spacing:.16em;
+  fill:#b0b0b3;
+}
+.toronto-water{ fill:#9aabb8; letter-spacing:.22em; }
+.toronto-pin{ fill:#86868b; }
+.toronto-dots circle{
+  fill:var(--grey-3);
+  opacity:.45;
+}
+.toronto-dots circle.lit{
+  fill:#FF2D92;
   opacity:1;
-  animation: gradient-drift 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(255,45,146,.45));
+}
+@media (max-width: 760px){
+  .toronto-cardinal,
+  .toronto-water,
+  .toronto-place{ font-size:11px; }
 }
 .dot-legend{
   display:flex;
@@ -2273,11 +2295,33 @@ img{max-width:100%;display:block;}
         </div>
         <div class="stat-num grad" data-count="18000" data-suffix="+">18,000<span class="unit">+</span></div>
         <div class="stat-label">people experiencing homelessness in Toronto, every single night — across shelters, encampments, and the street.</div>
-        <div class="dot-viz" aria-hidden="true"></div>
+        <svg class="toronto-viz" viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="lake-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d8e4ec" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#c0cfdc" stop-opacity="0.25"/>
+            </linearGradient>
+          </defs>
+          <!-- Toronto landmass -->
+          <path class="toronto-land" d="M 60 60 L 940 60 C 970 60, 990 80, 990 110 L 990 340 C 990 360, 975 378, 950 384 C 850 392, 750 396, 650 404 C 580 416, 480 418, 400 406 C 320 396, 220 392, 110 384 C 50 382, 30 362, 30 340 L 30 110 C 30 80, 50 60, 60 60 Z" />
+          <!-- Lake Ontario -->
+          <rect x="0" y="400" width="1000" height="80" fill="url(#lake-grad)" />
+          <!-- Toronto Islands -->
+          <ellipse cx="500" cy="440" rx="90" ry="9" class="toronto-island" />
+          <ellipse cx="630" cy="447" rx="38" ry="6" class="toronto-island" />
+          <!-- Compass + labels -->
+          <text x="500" y="50" class="toronto-cardinal" text-anchor="middle">N</text>
+          <text x="500" y="465" class="toronto-water" text-anchor="middle">LAKE ONTARIO</text>
+          <!-- Downtown marker -->
+          <circle cx="500" cy="362" r="2.5" class="toronto-pin" />
+          <text x="508" y="366" class="toronto-place">DOWNTOWN</text>
+          <!-- Dot layer (filled by JS) -->
+          <g class="toronto-dots"></g>
+        </svg>
         <div class="dot-legend">
           <span class="d-key"><span class="d-swatch lit"></span> In emergency shelter</span>
           <span class="d-key"><span class="d-swatch"></span> Encampments &amp; the street</span>
-          <span class="d-key-source">Each dot ≈ 90 people</span>
+          <span class="d-key-source">Each dot ≈ 90 people · positions reflect where they're sleeping tonight</span>
         </div>
         <div class="bar-source">Source · City of Toronto, Shelter Support &amp; Housing Administration</div>
       </div>
@@ -2729,20 +2773,58 @@ img{max-width:100%;display:block;}
   }, {threshold: 0.4});
   bars.forEach(el => bio.observe(el));
 
-  // Dot viz fill — 200 dots; lit dots represent the share in emergency shelter
-  // 18,000 total people, ~10,500 in shelter on any given night ≈ 58% lit
-  document.querySelectorAll('.dot-viz').forEach(grid => {
-    if(grid.children.length) return;
-    const total = 200;
-    const lit = 117; // ~58.5% — share in emergency shelter
-    const indices = new Set();
-    while(indices.size < lit){ indices.add(Math.floor(Math.random()*total)); }
-    for(let i=0;i<total;i++){
-      const d = document.createElement('span');
-      d.className = 'd' + (indices.has(i) ? ' lit' : '');
-      d.style.transitionDelay = (i * 3) + 'ms';
-      grid.appendChild(d);
+  // Toronto map visual — 200 dots placed in realistic clusters across the city.
+  // ~58% lit (in emergency shelter), concentrated downtown where most shelters operate.
+  document.querySelectorAll('.toronto-dots').forEach(layer => {
+    if(layer.children.length) return;
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    // Cluster centers (x, y, radius spread, weight, % lit) within viewBox 0 0 1000 480
+    // Higher 'lit' % downtown where shelter capacity is concentrated.
+    const clusters = [
+      // downtown core - dense, mostly shelter
+      { cx: 500, cy: 360, rx: 70, ry: 22, weight: 38, lit: 0.78 },
+      // parkdale / west downtown
+      { cx: 360, cy: 358, rx: 45, ry: 18, weight: 14, lit: 0.62 },
+      // east downtown / cabbagetown / leslieville
+      { cx: 640, cy: 358, rx: 55, ry: 20, weight: 14, lit: 0.55 },
+      // midtown / yonge & eglinton corridor
+      { cx: 500, cy: 250, rx: 130, ry: 35, weight: 28, lit: 0.55 },
+      // east end / scarborough
+      { cx: 770, cy: 200, rx: 140, ry: 80, weight: 32, lit: 0.50 },
+      // west end / etobicoke
+      { cx: 200, cy: 200, rx: 130, ry: 75, weight: 28, lit: 0.50 },
+      // north (north york / far suburbs)
+      { cx: 500, cy: 110, rx: 320, ry: 35, weight: 30, lit: 0.45 },
+      // very north edge
+      { cx: 500, cy: 75, rx: 320, ry: 12, weight: 16, lit: 0.35 }
+    ];
+    // sum weights -> 200
+    let total = 0;
+    clusters.forEach(c => total += c.weight);
+    const scale = 200 / total;
+    function gauss(){ // simple gaussian-ish [-1,1]
+      return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5;
     }
+    const dots = [];
+    clusters.forEach(c => {
+      const n = Math.round(c.weight * scale);
+      for(let i=0;i<n;i++){
+        const x = c.cx + gauss() * c.rx;
+        const y = c.cy + gauss() * c.ry;
+        const lit = Math.random() < c.lit;
+        dots.push({ x, y, lit });
+      }
+    });
+    // shuffle for visual variety on animation, then place
+    dots.sort(() => Math.random() - 0.5);
+    dots.forEach((d, i) => {
+      const c = document.createElementNS(SVG_NS, 'circle');
+      c.setAttribute('cx', d.x.toFixed(1));
+      c.setAttribute('cy', d.y.toFixed(1));
+      c.setAttribute('r', '3.6');
+      if(d.lit) c.setAttribute('class', 'lit');
+      layer.appendChild(c);
+    });
   });
 
   // Top-bar light/dark mode based on current section background
