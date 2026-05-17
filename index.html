@@ -1000,6 +1000,103 @@ img{max-width:100%;display:block;}
   text-transform:none;
 }
 
+/* ============ PRESS / CP24 SEGMENT ============ */
+.press{
+  background:var(--black);
+  padding:160px 0;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  color:var(--white);
+}
+.press .conic-halo{
+  width:1200px; height:1200px;
+  top:-30%; left:50%;
+  transform:translateX(-50%);
+  opacity:.25;
+}
+.press .wrap-tight{ position:relative; z-index:2; }
+.press-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--grey-3);
+  margin-bottom:32px;
+}
+.press h2{
+  font-size:clamp(36px, 4.5vw, 64px);
+  font-weight:400;
+  letter-spacing:-.035em;
+  line-height:1.05;
+  color:var(--white);
+  margin:0 0 24px;
+}
+.press h2 em{
+  font-style:italic;
+  background:var(--grad-ai, linear-gradient(120deg, #FF2D92, #AF52DE, #5856D6, #00C7BE));
+  background-size:200% 200%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: gradient-drift 8s ease-in-out infinite;
+}
+.press-lead{
+  font-size:17px;
+  line-height:1.55;
+  color:var(--grey-2);
+  max-width:640px;
+  margin:0 auto 56px;
+}
+.press-video{
+  position:relative;
+  padding-bottom:56.25%;
+  height:0;
+  max-width:880px;
+  margin:0 auto;
+  border-radius:18px;
+  overflow:hidden;
+  background:#000;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+}
+.press-video iframe{
+  position:absolute;
+  inset:0;
+  width:100%; height:100%;
+  border:0;
+}
+.press-meta{
+  margin-top:32px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--grey-2);
+}
+.press-link{
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  transition:border-color .25s ease, color .25s ease;
+  padding-bottom:1px;
+}
+.press-link .arrow{ display:inline-block; margin-left:4px; transition:transform .25s ease;}
+.press-link:hover{ border-bottom-color:#fff; }
+.press-link:hover .arrow{ transform: translateX(3px); }
+.press-sep{ opacity:.4; }
+@media (max-width: 760px){
+  .press{ padding:100px 0; }
+  .press-video{ border-radius:14px; }
+}
+
 /* ============ MISSION TURN ============ */
 .turn{
   background:var(--black);
@@ -2539,6 +2636,26 @@ img{max-width:100%;display:block;}
         <div class="stat-label">average homeless deaths per week in Toronto. Every week. Without exception.</div>
         <div class="bar-source">Source · Toronto Public Health, Homeless Deaths Report</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05.5 — AS SEEN ON CP24 ============ -->
+<section class="press" id="press">
+  <div class="conic-halo"></div>
+  <div class="wrap-tight">
+    <div class="press-kicker reveal"><span class="grad-dot"></span>As seen on CP24 · January 2026</div>
+    <h2 class="reveal reveal-1">Real work.<br><em>On the record.</em></h2>
+    <p class="press-lead reveal reveal-2">Bob Charendoff on the night Toronto's shelter system scrambled to get people indoors before a winter storm. The work that Songs For Hope funds.</p>
+    <div class="press-video reveal reveal-3">
+      <iframe src="https://embed.jasperplayer.com?brand=CP24&destination=cp24_web&language=EN&contentId=3298608" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen loading="lazy" title="Bob Charendoff on CP24 — Keeping Toronto's homeless population safe from the dangers of the incoming winter storm"></iframe>
+    </div>
+    <div class="press-meta reveal reveal-4">
+      <span>January 23, 2026</span>
+      <span class="press-sep">·</span>
+      <span>CP24 News</span>
+      <span class="press-sep">·</span>
+      <a href="https://www.cp24.com/video/2026/01/24/keeping-torontos-homeless-population-safe-from-the-dangers-of-the-incoming-winter-storm/" target="_blank" rel="noopener" class="press-link">Watch on CP24 <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
