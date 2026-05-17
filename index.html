@@ -1486,6 +1486,68 @@ img{max-width:100%;display:block;}
   padding:200px 0;
   position:relative;
 }
+/* Past Partners strip */
+.past-partners{
+  background: var(--white);
+  padding: 88px 0;
+  border-top: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.pp-head{ text-align:center; margin: 0 auto 48px; max-width: 640px;}
+.pp-head h3{
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight:400;
+  letter-spacing:-.025em;
+  margin: 12px 0 14px;
+  line-height: 1.1;
+}
+.pp-head h3 em{
+  font-style: italic;
+  background: var(--grad-ai, linear-gradient(120deg, #FF2D92, #AF52DE, #5856D6, #00C7BE));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-drift 8s ease-in-out infinite;
+}
+.pp-sub{
+  font-size:15px;
+  color: var(--grey-1);
+  margin: 0 auto;
+  line-height: 1.55;
+}
+.pp-grid{
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  align-items: center;
+  justify-items: stretch;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.pp-logo{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1d1d1f;
+  text-align: center;
+  padding: 22px 10px;
+  white-space: nowrap;
+  opacity: .55;
+  transition: opacity .25s ease;
+  border-radius: 12px;
+  background: rgba(0,0,0,.025);
+}
+.pp-logo:hover{ opacity: 1; background: rgba(0,0,0,.045); }
+@media (max-width: 960px){
+  .pp-grid{grid-template-columns: repeat(3, 1fr); gap: 14px;}
+}
+@media (max-width: 560px){
+  .pp-grid{grid-template-columns: repeat(2, 1fr); gap: 12px;}
+  .pp-logo{font-size: 10.5px; padding: 18px 6px;}
+}
 .partnership-head{margin-bottom:100px; max-width:980px;}
 .partnership-head h2{
   font-size: var(--h2-section);
@@ -2550,6 +2612,25 @@ img{max-width:100%;display:block;}
       <div class="spec"><div class="spec-ico"><svg><use href="#i-glass"/></svg></div><div><div class="vs-k">Hospitality</div><div class="vs-v">Full bar &amp; service</div></div></div>
       <div class="spec"><div class="spec-ico"><svg><use href="#i-star"/></svg></div><div><div class="vs-k">Visibility</div><div class="vs-v">Networking &amp; sponsor exposure</div></div></div>
       <div class="spec"><div class="spec-ico"><svg><use href="#i-pin"/></svg></div><div><div class="vs-k">Location</div><div class="vs-v">Queen Street West, Toronto</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09.5 — PAST PARTNERS ============ -->
+<section class="past-partners" id="past-partners">
+  <div class="wrap">
+    <div class="pp-head reveal">
+      <div class="kicker"><span class="grad-dot"></span>In Good Company</div>
+      <h3 class="reveal reveal-1">Past <em>partners.</em></h3>
+      <p class="pp-sub reveal reveal-2">The businesses that have stood with Seeds of Hope through previous benefits. Your name belongs here.</p>
+    </div>
+    <div class="pp-grid reveal reveal-3">
+      <div class="pp-logo">Upper&nbsp;Canada</div>
+      <div class="pp-logo">Segal&nbsp;Law</div>
+      <div class="pp-logo">Imperial&nbsp;Capital</div>
+      <div class="pp-logo">Cooper&nbsp;Mediation</div>
+      <div class="pp-logo">Cohen&nbsp;Homes</div>
+      <div class="pp-logo">Signet&nbsp;Group</div>
     </div>
   </div>
 </section>
