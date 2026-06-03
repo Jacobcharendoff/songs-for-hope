@@ -1,6 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>
+// Disable browser's scroll restoration and any stale hash navigation BEFORE the browser scrolls anywhere.
+(function(){
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    // Strip any stale hash on initial load so the browser does not auto-scroll to a section.
+    if (location.hash) {
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+  } catch(e) {}
+  // Belt-and-suspenders: scroll to top at multiple lifecycle points.
+  var stickTop = function(){ window.scrollTo(0, 0); };
+  stickTop();
+  document.addEventListener('DOMContentLoaded', stickTop, { once: true });
+  window.addEventListener('load', function(){
+    stickTop();
+    // One more after layout settles (fonts/images).
+    setTimeout(stickTop, 50);
+  });
+})();
+</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Songs For Hope 2026 — Sponsorship Experience</title>
@@ -2358,15 +2379,6 @@ img{max-width:100%;display:block;}
 </style>
 </head>
 <body>
-<script>
-// Force top-of-page on initial load (overrides browser scroll restoration / stale hash)
-if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-window.addEventListener('load', function(){
-  if (!location.hash || location.hash === '#') {
-    window.scrollTo(0, 0);
-  }
-});
-</script>
 
 <!-- ============ ICON LIBRARY ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
