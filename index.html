@@ -746,8 +746,10 @@ img{max-width:100%;display:block;}
 }
 .partner-grid{
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap:18px;
+  max-width:880px;
+  margin:0 auto;
 }
 .partner-card{
   padding:32px 20px;
@@ -1278,7 +1280,7 @@ img{max-width:100%;display:block;}
   margin-top:32px;
 }
 @media (min-width: 1400px){
-  .work-supporting{ grid-template-columns: repeat(5, 1fr); }
+  .work-supporting{ grid-template-columns: repeat(3, 1fr); }
 }
 .wcard{
   background:var(--white);
@@ -1559,7 +1561,7 @@ img{max-width:100%;display:block;}
 }
 .venue-specs{
   display:grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap:24px;
   margin-top:80px;
   padding-top:48px;
@@ -1634,14 +1636,18 @@ img{max-width:100%;display:block;}
   line-height: 1.55;
 }
 .pp-grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
   gap: 18px;
-  align-items: stretch;
-  justify-items: stretch;
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 24px;
+}
+.pp-card{
+  flex: 0 1 calc(33.33% - 12px);
+  min-width: 240px;
+  max-width: 360px;
 }
 .pp-card{
   background:#fff;
@@ -2441,8 +2447,8 @@ img{max-width:100%;display:block;}
       </div>
       <div class="flow-node">
         <div class="flow-icon"><svg><use href="#i-meal"/></svg></div>
-        <div class="flow-num grad">5,000</div>
-        <div class="flow-label">Hot meals served<br><span style="color:var(--grey-1);">Every single week</span></div>
+        <div class="flow-num grad">2,000</div>
+        <div class="flow-label">People served<br><span style="color:var(--grey-1);">Every single week</span></div>
       </div>
       <div class="flow-node">
         <div class="flow-icon"><svg><use href="#i-cal"/></svg></div>
@@ -2452,8 +2458,8 @@ img{max-width:100%;display:block;}
       <div class="flow-arrow"><svg><use href="#i-arrow"/></svg></div>
       <div class="flow-result">
         <div class="label">Annual Impact</div>
-        <div class="num">260,000</div>
-        <div class="sub">meals · housing · mental health · safe shelter</div>
+        <div class="num">104,000</div>
+        <div class="sub">people served · housing · mental health · safe shelter</div>
       </div>
     </div>
 
@@ -2500,8 +2506,8 @@ img{max-width:100%;display:block;}
           <div class="track">
             <div class="n">B2</div>
             <div class="ico"><svg><use href="#i-trophy"/></svg></div>
-            <div class="t">50/50 Draw &amp; Silent Auction<span class="sub">Funded by tonight, for the year ahead</span></div>
-            <div class="time">10:00 PM</div>
+            <div class="t">50/50 Draw &amp; Silent Auction<span class="sub">Silent Auction ends · 50/50 winner announced</span></div>
+            <div class="time">9:30 PM</div>
           </div>
         </div>
       </div>
@@ -2514,8 +2520,8 @@ img{max-width:100%;display:block;}
   <div class="conic-halo"></div>
   <div class="wrap">
     <p class="precede reveal reveal-1">Every single week,<br>Seeds of Hope serves</p>
-    <div class="big-num reveal reveal-2" data-count="5000" data-suffix="+">5,000+</div>
-    <p class="follow reveal reveal-3">hot, individually packaged, nutritious meals<br>and delivers hundreds of grocery hampers<br>to Toronto's most vulnerable communities.</p>
+    <div class="big-num reveal reveal-2" data-count="2000" data-suffix="+">2,000+</div>
+    <p class="follow reveal reveal-3">people served weekly &mdash;<br>nutritious hot food outreach to street, community meals,<br>4 pop-up food banks, home deliveries to the infirm,<br>and bag lunches by outreach teams.</p>
 
     <div class="partner-network reveal reveal-4">
       <div class="label">Working in partnership with</div>
@@ -2524,11 +2530,6 @@ img{max-width:100%;display:block;}
           <div class="pico"><svg><use href="#i-house"/></svg></div>
           <div class="pname">Streets to Homes</div>
           <div class="pdesc">Street outreach &amp; housing</div>
-        </div>
-        <div class="partner-card">
-          <div class="pico"><svg><use href="#i-hands"/></svg></div>
-          <div class="pname">Sistering</div>
-          <div class="pdesc">Drop-in for women</div>
         </div>
         <div class="partner-card">
           <div class="pico"><svg><use href="#i-shield"/></svg></div>
@@ -2709,7 +2710,7 @@ img{max-width:100%;display:block;}
     <div class="work-head reveal">
       <div class="kicker"><span class="grad-dot"></span>07 · The Work</div>
       <h2>Pathways toward stability,<br>dignity, and <em>hope.</em></h2>
-      <p>Six interconnected programs — practical, compassionate, designed for long-term change. Independent housing is the cornerstone. Every other program is in service of that outcome.</p>
+      <p>Ten interconnected programs — practical, compassionate, designed for long-term change. Independent housing is the cornerstone. Every other program is in service of that outcome.</p>
     </div>
 
     <div class="work-flagship reveal reveal-1">
@@ -2725,13 +2726,18 @@ img{max-width:100%;display:block;}
       <div style="display:flex; flex-direction:column; gap:18px;">
         <div class="wcard">
           <div class="wico"><svg><use href="#i-bed"/></svg></div>
-          <h4>Emergency shelter.</h4>
-          <p>Safe, immediate shelter for those in crisis. No one in Toronto should sleep on the street when they do not have to.</p>
+          <h4>Lazarus House.</h4>
+          <p>Safe, immediate shelter for those in crisis who have been unable to access city shelters. Includes elderly women and men discharged from hospital with no options for safe shelter. No one in Toronto should sleep on the street when they do not have to.</p>
+        </div>
+        <div class="wcard">
+          <div class="wico"><svg><use href="#i-house"/></svg></div>
+          <h4>Tiny Homes.</h4>
+          <p>Hosting Toronto&rsquo;s first tiny home community &mdash; a secure space for people coming off the street to keep their belongings and themselves safe. Time and presence of mind to work on life.</p>
         </div>
         <div class="wcard">
           <div class="wico"><svg><use href="#i-bridge"/></svg></div>
-          <h4>Broadview Homes.</h4>
-          <p>Transitional housing — a bridge between the street and permanent housing with wraparound support services.</p>
+          <h4>Mens Addiction Recovery &mdash; Broadview Homes.</h4>
+          <p>Transitional housing for men living in sobriety after detox and treatment. Space, time, and resources to build pathways back to a healthy life.</p>
         </div>
       </div>
     </div>
@@ -2739,33 +2745,33 @@ img{max-width:100%;display:block;}
     <div class="work-supporting">
       <div class="wcard reveal reveal-1">
         <div class="wico"><svg><use href="#i-hands"/></svg></div>
-        <div class="wn">04 · H2H</div>
-        <h4>Home-to-Home.</h4>
+        <h4>Homes-to-Homes.</h4>
         <p>Lasting housing solutions with peer support, life skills coaching, and community integration.</p>
       </div>
       <div class="wcard reveal reveal-2">
         <div class="wico"><svg><use href="#i-heart-mind"/></svg></div>
-        <div class="wn">05 · Support</div>
         <h4>Mental health &amp; life skills.</h4>
         <p>Addiction counselling, employment readiness, and life-skills programs that sustain independence.</p>
       </div>
       <div class="wcard reveal reveal-3">
         <div class="wico"><svg><use href="#i-shield"/></svg></div>
-        <div class="wn">06 · Concord Adex</div>
         <h4>Safe housing for survivors.</h4>
-        <p>Safe, stable housing for women and children escaping abuse and survivors of human trafficking.</p>
+        <p>Safe, stable housing for women escaping abuse and survivors of human trafficking.</p>
       </div>
       <div class="wcard reveal reveal-4">
+        <div class="wico"><svg><use href="#i-star"/></svg></div>
+        <h4>Yellow Door Learning Centre.</h4>
+        <p>Life-skills courses that build resilience. Art and music gatherings for inclusion and belonging. Healing groups including AA, SA, GA, NA. Non-denominational ecumenical spiritual meetings.</p>
+      </div>
+      <div class="wcard reveal reveal-5">
         <div class="wico"><svg><use href="#i-bowl"/></svg></div>
-        <div class="wn">01 · Foundation</div>
-        <h4>5,000 meals weekly.</h4>
-        <p>The foundation of everything else — hot, individually packaged, nutritious meals delivered every week.</p>
+        <h4>2,000 meals weekly.</h4>
+        <p>The foundation of everything else &mdash; hot, individually packaged, nutritious meals delivered every week.</p>
       </div>
       <div class="wcard reveal reveal-5">
         <div class="wico"><svg><use href="#i-pulse"/></svg></div>
-        <div class="wn">+ · Outreach</div>
         <h4>Community outreach.</h4>
-        <p>Building the network of support that keeps people connected — Streets to Homes, Sistering, M-Dot, CAMH.</p>
+        <p>Building the network of support that keeps people connected &mdash; Streets to Homes, Out of the Cold, M-Dot, CAMH.</p>
       </div>
     </div>
   </div>
@@ -2914,6 +2920,13 @@ img{max-width:100%;display:block;}
             <rect x="4.8" y="-19" width="2.2" height="38"/>
           </g>
           <text x="160" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="400" letter-spacing="4" fill="#5a5a5c">GROUP</text>
+        </svg>
+      </div>
+
+      <div class="pp-card">
+        <svg class="pp-svg" viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg" aria-label="The Kenny &amp; Sandy Gordon Foundation">
+          <text x="120" y="50" text-anchor="middle" font-family="Garamond, 'Times New Roman', Georgia, serif" font-size="18" font-weight="600" fill="#2e3da3">The Kenny &amp; Sandy Gordon</text>
+          <text x="120" y="78" text-anchor="middle" font-family="Garamond, 'Times New Roman', Georgia, serif" font-size="18" font-weight="600" fill="#2e3da3">Foundation</text>
         </svg>
       </div>
 
