@@ -2228,6 +2228,17 @@ img{max-width:100%;display:block;}
 .vb-bio{font-size:15px; line-height:1.6; color:var(--grey-1); margin:0 0 24px 0; max-width:560px;}
 .vb-contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,.08);}
 .vb-contact-grid .vc-v{font-size:14px; color:#fff;}
+.vb-contact-grid .vc-link{
+  text-decoration:none;
+  color:inherit;
+  display:inline-block;
+  border-bottom:1px solid transparent;
+  transition: border-color .25s ease, color .25s ease;
+}
+.vb-contact-grid .vc-link:hover{
+  border-bottom-color: rgba(255,255,255,.4);
+  color:#fff;
+}
 @media (max-width: 760px){
   .vcard-bio{grid-template-columns:1fr; text-align:center; padding:28px;}
   .vb-photo{margin:0 auto;}
@@ -3113,9 +3124,9 @@ img{max-width:100%;display:block;}
         <div class="vc-sub">Director of Fundraising · Seeds of Hope Foundation</div>
         <p class="vb-bio">Bob has spent more than two decades raising funds for the people Seeds of Hope serves. He started Songs For Hope to do one thing well: turn a single night of music into a year of meals, shelter, and support. He runs the event, books the room, and is the person sponsors talk to.</p>
         <div class="vb-contact-grid">
-          <div><div class="vc-k">Email</div><div class="vc-v">bobcharendoff@gmail.com</div></div>
-          <div><div class="vc-k">Phone</div><div class="vc-v">416-300-9498</div></div>
-          <div><div class="vc-k">Web</div><div class="vc-v">www.seedsofhope.ca</div></div>
+          <div><div class="vc-k">Email</div><a class="vc-v vc-link" href="mailto:bobcharendoff@gmail.com">bobcharendoff@gmail.com</a></div>
+          <div><div class="vc-k">Phone</div><a class="vc-v vc-link" href="tel:+14163009498">416-300-9498</a></div>
+          <div><div class="vc-k">Web</div><a class="vc-v vc-link" href="https://www.seedsofhope.ca" target="_blank" rel="noopener">www.seedsofhope.ca</a></div>
         </div>
       </div>
     </div>
