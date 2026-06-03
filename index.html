@@ -2358,6 +2358,15 @@ img{max-width:100%;display:block;}
 </style>
 </head>
 <body>
+<script>
+// Force top-of-page on initial load (overrides browser scroll restoration / stale hash)
+if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+window.addEventListener('load', function(){
+  if (!location.hash || location.hash === '#') {
+    window.scrollTo(0, 0);
+  }
+});
+</script>
 
 <!-- ============ ICON LIBRARY ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3111,7 +3120,7 @@ img{max-width:100%;display:block;}
     <h2 class="reveal reveal-1">Become a <em>sponsor.</em></h2>
     <p class="sub reveal reveal-2">Ready to make a difference? Reach out to discuss how we make your partnership work — for the night, for the year, for the work.</p>
     <div class="close-actions reveal reveal-3">
-      <a href="mailto:bobcharendoff@gmail.com" class="btn btn-grad">Email Bob <span class="arrow">→</span></a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bobcharendoff@gmail.com&su=Songs%20For%20Hope%202026%20%E2%80%94%20Sponsorship%20Interest&body=Hi%20Bob%2C%0A%0AI%27m%20reaching%20out%20about%20Songs%20For%20Hope%202026.%20I%27d%20love%20to%20discuss%20" target="_blank" rel="noopener" class="btn btn-grad" data-mailto="mailto:bobcharendoff@gmail.com?subject=Songs%20For%20Hope%202026%20%E2%80%94%20Sponsorship%20Interest">Email Bob <span class="arrow">→</span></a>
       <a href="tel:+14163009498" class="btn btn-ghost">Call 416-300-9498</a>
     </div>
     <div class="vcard-bio reveal reveal-4">
