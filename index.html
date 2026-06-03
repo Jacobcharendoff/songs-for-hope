@@ -342,6 +342,11 @@ img{max-width:100%;display:block;}
   object-fit:cover;
 }
 .hero-stage .pipe{color:var(--grey-1); opacity:.5;}
+@media (max-width: 540px){
+  .hero-stage .pipe{display:none;}
+  .hero-stage{gap:8px 14px;}
+  .hero-stage img.sfh-emblem, .hero-stage img{width:48px; height:48px; border-radius:10px;}
+}
 .hero-thesis{
   font-size:clamp(52px, 6.8vw, 110px);
   line-height:1.02;
@@ -2863,8 +2868,8 @@ img{max-width:100%;display:block;}
           <rect x="75" y="20" width="35" height="22" fill="#D7234F"/>
           <rect x="110" y="20" width="35" height="22" fill="#00B7C2"/>
           <rect x="145" y="20" width="35" height="22" fill="#86C04A"/>
-          <text x="110" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="18" letter-spacing="3" fill="#0a0a0a">UPPER  CANADA</text>
-          <text x="110" y="90" text-anchor="middle" font-family="Georgia, serif" font-size="8" letter-spacing="3.6" fill="#7a7a7c">LONDON   •   NEW YORK   •   TORONTO</text>
+          <text x="110" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="18" letter-spacing="2.4" fill="#0a0a0a">UPPER CANADA</text>
+          <text x="110" y="90" text-anchor="middle" font-family="Georgia, serif" font-size="8" letter-spacing="1.8" fill="#7a7a7c">LONDON · NEW YORK · TORONTO</text>
         </svg>
       </div>
 
