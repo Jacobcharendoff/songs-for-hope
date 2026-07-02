@@ -1891,6 +1891,76 @@ img{max-width:100%;display:block;}
   .pp-grid{grid-template-columns: 1fr; gap: 12px; padding: 0 12px;}
   .pp-card{ padding: 22px; aspect-ratio: 2.4 / 1;}
 }
+.partnership-reach{
+  max-width:980px;
+  margin-bottom:56px;
+  padding:36px 40px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;
+  background: linear-gradient(135deg, rgba(255,45,146,.04) 0%, rgba(88,86,214,.04) 40%, rgba(0,199,190,.04) 100%);
+  position:relative;
+  overflow:hidden;
+}
+.partnership-reach::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, transparent 60%, rgba(0,199,190,.06) 100%);
+  pointer-events:none;
+}
+.pr-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--grey-1);
+  margin-bottom:20px;
+  position:relative;
+}
+.pr-lead{
+  font-size:20px;
+  line-height:1.45;
+  color:var(--ink);
+  letter-spacing:-.015em;
+  margin:0 0 16px;
+  position:relative;
+}
+.pr-lead strong{
+  color:var(--ink);
+  background: var(--grad-ai);
+  background-size:200% 200%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: gradient-drift 8s ease-in-out infinite;
+  font-weight:600;
+}
+.pr-proof{
+  font-size:16px;
+  line-height:1.6;
+  color:var(--grey-1);
+  margin:0;
+  position:relative;
+}
+.pr-proof strong{
+  color:var(--ink);
+  font-weight:600;
+}
+.pr-proof em{
+  font-style:italic;
+  color:var(--grey-1);
+}
+@media (max-width: 760px){
+  .partnership-reach{
+    padding:28px 24px;
+    margin-bottom:40px;
+  }
+  .pr-lead{font-size:17px;}
+  .pr-proof{font-size:15px;}
+}
 .partnership-head{margin-bottom:100px; max-width:980px;}
 .partnership-head h2{
   font-size: var(--h2-section);
@@ -3182,6 +3252,12 @@ img{max-width:100%;display:block;}
 <!-- ============ 10 — PARTNERSHIP ============ -->
 <section class="partnership" id="partner">
   <div class="wrap-wide">
+    <div class="partnership-reach reveal">
+      <div class="pr-eyebrow"><span class="grad-dot"></span>New for 2026 · Audience Reach</div>
+      <p class="pr-lead">Songs For Hope 2026 will be <strong>live-streamed online</strong>, in addition to welcoming in-person attendees &mdash; expanding sponsor visibility and audience reach.</p>
+      <p class="pr-proof">Our 2020 <em>&ldquo;Stay Home For Homelessness&rdquo;</em> concert drew more than <strong>1,500 unique online viewers</strong>. As an established event, Songs For Hope offers your brand the opportunity to reach a broader audience.</p>
+    </div>
+
     <div class="partnership-head reveal">
       <div class="kicker"><span class="grad-dot"></span>10 · The Partnership</div>
       <h2>Choose how you<br>show up <em>this year.</em></h2>
