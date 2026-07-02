@@ -2035,6 +2035,53 @@ img{max-width:100%;display:block;}
   transition: all .35s ease;
 }
 .exc:hover{transform:translateY(-3px); box-shadow:0 20px 50px rgba(0,0,0,.07);}
+.exc-secured{
+  position:relative;
+  background:#fafafa;
+  border-color: rgba(0,0,0,.08);
+  overflow:hidden;
+}
+.exc-secured:hover{transform:none; box-shadow:none;}
+.exc-secured .exc-ico{
+  filter: saturate(.5) brightness(.9);
+  opacity:.65;
+}
+.exc-secured h4{color: var(--grey-1);}
+.exc-secured ul{opacity:.55;}
+.exc-secured ul li{color: var(--grey-1);}
+.exc-secured::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(135deg, rgba(0,199,190,.06) 0%, transparent 40%);
+}
+.exc-ribbon{
+  position:absolute;
+  top:14px;
+  right:14px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#00786f;
+  background: rgba(0,199,190,.14);
+  border:1px solid rgba(0,199,190,.35);
+  padding:6px 10px;
+  border-radius:999px;
+  z-index:2;
+}
+.exc-ribbon svg{color:#00786f;}
+.price-line-secured{
+  color: var(--grey-1) !important;
+  font-style: italic;
+  font-weight: 400;
+}
+
 .exc-top{
   display:flex;
   align-items:center;
@@ -3068,15 +3115,16 @@ img{max-width:100%;display:block;}
     <div class="tiers-exclusive reveal reveal-2">
       <div class="exc-header">
         <strong>Exclusive sponsorships</strong>
-        Single-occupancy categories. Your brand owns the bar — or the kitchen — for the entire night.
+        Single-occupancy categories. Both secured for 2026 &mdash; below is what our exclusive partner is receiving.
       </div>
       <div class="exc-grid">
-        <div class="exc">
+        <div class="exc exc-secured">
+          <div class="exc-ribbon"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Secured for 2026</div>
           <div class="exc-top">
             <div class="exc-ico"><svg><use href="#i-bowl"/></svg></div>
             <h4>Official Food Sponsor</h4>
           </div>
-          <div class="price-line">$7,500 · Exclusive · One sponsor</div>
+          <div class="price-line price-line-secured">No longer available</div>
           <ul>
             <li>Exclusive "Official Food Sponsor" designation</li>
             <li>Logo displayed at food service area</li>
@@ -3085,12 +3133,13 @@ img{max-width:100%;display:block;}
             <li>Event tickets included</li>
           </ul>
         </div>
-        <div class="exc">
+        <div class="exc exc-secured">
+          <div class="exc-ribbon"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Secured for 2026</div>
           <div class="exc-top">
             <div class="exc-ico"><svg><use href="#i-glass"/></svg></div>
             <h4>Official Bar Sponsor</h4>
           </div>
-          <div class="price-line">$7,500 · Exclusive · One sponsor</div>
+          <div class="price-line price-line-secured">No longer available</div>
           <ul>
             <li>Exclusive "Official Bar Sponsor" designation</li>
             <li>Logo displayed at bar and beverage areas</li>
