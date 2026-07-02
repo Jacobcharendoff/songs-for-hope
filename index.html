@@ -731,7 +731,9 @@ img{max-width:100%;display:block;}
   line-height:1.4;
 }
 .answer .big-num{
-  font-size:clamp(96px, 28vw, 520px);
+  font-size:clamp(84px, 20vw, 340px);
+  max-width:100%;
+  overflow-wrap:break-word;
   line-height:.85;
   letter-spacing:-.075em;
   font-weight:600;
@@ -1106,6 +1108,113 @@ img{max-width:100%;display:block;}
   inset:0;
   width:100%; height:100%;
   border:0;
+}
+.press-video-facade{
+  position:absolute;
+  inset:0;
+  width:100%; height:100%;
+  padding:0;
+  margin:0;
+  border:0;
+  background:#0a0a0a;
+  cursor:pointer;
+  overflow:hidden;
+  display:block;
+  color:inherit;
+  font:inherit;
+}
+.press-video-poster{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), filter .4s ease;
+  filter: brightness(.6) saturate(.95);
+}
+.press-video-facade:hover .press-video-poster{
+  transform: scale(1.03);
+  filter: brightness(.7) saturate(1.05);
+}
+.press-video-scrim{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,.6) 100%);
+  pointer-events:none;
+}
+.press-video-body{
+  position:absolute;
+  left:0; right:0; bottom:28px;
+  text-align:center;
+  padding:0 24px;
+  z-index:2;
+}
+.press-video-eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.85);
+  margin-bottom:10px;
+}
+.press-video-heading{
+  font-size:20px;
+  line-height:1.25;
+  letter-spacing:-.015em;
+  color:#fff;
+  max-width:520px;
+  margin:0 auto;
+  font-weight:500;
+}
+.press-video-play{
+  position:absolute;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  width:96px;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:3;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.5));
+}
+.press-video-play svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.press-video-play .pvp-shape{
+  transition: fill .25s ease, opacity .25s ease;
+}
+.press-video-facade:hover .press-video-play{
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.press-video-facade:hover .press-video-play .pvp-shape{
+  fill:#e60000;
+}
+.press-video-brand{
+  position:absolute;
+  top:16px; right:20px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.9);
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.15);
+  z-index:2;
+}
+@media (max-width: 640px){
+  .press-video-heading{ font-size:15px; max-width:320px; }
+  .press-video-play{ width:76px; height:54px; }
+  .press-video-body{ bottom:18px; }
 }
 .press-meta{
   margin-top:32px;
@@ -2766,7 +2875,18 @@ img{max-width:100%;display:block;}
     <h2 class="reveal reveal-1">Real work.<br><em>On the record.</em></h2>
     <p class="press-lead reveal reveal-2">Bob Charendoff on the night Toronto's shelter system scrambled to get people indoors before a winter storm. The work that Songs For Hope funds.</p>
     <div class="press-video reveal reveal-3">
-      <iframe src="https://embed.jasperplayer.com?brand=CP24&destination=cp24_web&language=EN&contentId=3298608" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen loading="lazy" title="Bob Charendoff on CP24 — Keeping Toronto's homeless population safe from the dangers of the incoming winter storm"></iframe>
+      <button class="press-video-facade" type="button" aria-label="Play CP24 news segment featuring Bob Charendoff" data-src="https://embed.jasperplayer.com?brand=CP24&destination=cp24_web&language=EN&contentId=3298608&autoplay=1">
+        <img class="press-video-poster" src="/photos/Unknown-2.png" alt="" loading="lazy" />
+        <div class="press-video-scrim"></div>
+        <div class="press-video-body">
+          <div class="press-video-eyebrow">CP24 News · Toronto</div>
+          <div class="press-video-heading">Bob Charendoff on Toronto&rsquo;s winter storm shelter response</div>
+        </div>
+        <div class="press-video-play" aria-hidden="true">
+          <svg viewBox="0 0 68 48"><path class="pvp-shape" d="M66.52 7.74a8.53 8.53 0 0 0-6-6C55.85.5 34 .5 34 .5S12.15.5 7.48 1.74a8.53 8.53 0 0 0-6 6A89.94 89.94 0 0 0 0 24a89.94 89.94 0 0 0 1.48 16.26 8.53 8.53 0 0 0 6 6C12.15 47.5 34 47.5 34 47.5s21.85 0 26.52-1.24a8.53 8.53 0 0 0 6-6A89.94 89.94 0 0 0 68 24a89.94 89.94 0 0 0-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+        </div>
+        <div class="press-video-brand">CP24</div>
+      </button>
     </div>
     <div class="press-meta reveal reveal-4">
       <span>January 23, 2026</span>
@@ -3344,5 +3464,25 @@ img{max-width:100%;display:block;}
 })();
 </script>
 
+
+<script>
+document.addEventListener('click', function(e){
+  var f = e.target.closest('.press-video-facade');
+  if(!f) return;
+  var src = f.getAttribute('data-src');
+  if(!src) return;
+  var iframe = document.createElement('iframe');
+  iframe.setAttribute('src', src);
+  iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture');
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('title', 'CP24 news segment');
+  var wrap = f.parentNode;
+  wrap.appendChild(iframe);
+  f.style.transition = 'opacity .25s ease';
+  f.style.opacity = '0';
+  setTimeout(function(){ f.remove(); }, 260);
+}, {passive:true});
+</script>
 </body>
 </html>
