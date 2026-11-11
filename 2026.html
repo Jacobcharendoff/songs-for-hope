@@ -2809,10 +2809,44 @@ img{max-width:100%;display:block;}
   .tb-count{ position: static; transform: none; padding: 5px 10px; gap: 7px; }
   .topbar .right{ display: none; }
 }
+@media (max-width: 430px){
+  .tb-count [data-tb-label]{ display: none; }
+}
+@media (max-width: 380px){
+  .tb-count{ padding: 4px 8px; gap: 6px; }
+  .topbar{ padding-left: 14px; padding-right: 14px; }
+}
 
 
 /* gradient italic headings: never clip the italic overhang, even across line breaks */
 h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-right: .1em; }
+
+
+/* ============ HERO TYPE (bigger, bolder) ============ */
+.hero .wrap{ max-width: 1440px; }
+.hero-thesis{ font-size: clamp(56px, 8.4vw, 156px); font-weight: 700; letter-spacing: -.052em; line-height: .98; margin-bottom: 56px; }
+.hero-thesis em, .hero-thesis strong{ font-weight: 700; }
+@media (max-width: 480px){
+  .hero-thesis{ font-size: clamp(44px, 14.6vw, 72px); letter-spacing: -.05em; }
+}
+@media (max-width: 760px){
+  .hero-actions{ justify-self: stretch; width: 100%; }
+  .hero-actions .btn{ flex: 1; justify-content: center; }
+}
+
+/* ============ RESPONSIVE FIXES (QA sweep) ============ */
+@media (max-width: 600px){
+  .work-supporting{ grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px){
+  .venue h2{ font-size: clamp(38px, 13vw, 60px) !important; }
+  .artists-intro h2{ font-size: clamp(38px, 13vw, 56px) !important; }
+}
+@media (max-width: 360px){
+  .flow-diagram{ grid-template-columns: 1fr !important; }
+  .flow-diagram > *{ min-width: 0; }
+  .flow-result{ grid-column: auto !important; }
+}
 
 /* ============ STICKY ACTION BAR (all screens) ============ */
 .tix-sticky{ position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
@@ -2877,7 +2911,7 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
 <!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="left"><span class="dot"></span>SONGS&nbsp;FOR&nbsp;HOPE&nbsp;·&nbsp;2026</div>
-  <div class="tb-count" data-tb-count><span class="tb-dot"></span><span data-tb-label>Doors in</span><b data-tb-time>--</b></div>
+  <div class="tb-count" data-tb-count><span class="tb-dot"></span><span data-tb-label>Doors open in</span><b data-tb-time>--</b></div>
   <div class="right">
     <span>Drake Underground</span>
     <span>Toronto</span>
@@ -3566,7 +3600,7 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
 
 <!-- Sticky action bar (all screens) -->
 <div class="tix-sticky" id="tixSticky">
-  <div class="ts-meta"><b>Songs For Hope · Sat Nov 14</b><span data-ts-sub>The Drake Underground · $50</span></div>
+  <div class="ts-meta"><b>Songs For Hope · Sat Nov 14</b><span data-ts-sub>Doors open in</span></div>
   <div class="ts-actions">
     <a class="ts-btn ts-buy" href="https://www.canadahelps.org/en/charities/seeds-of-hope-foundation/events/songs-for-hope-2026-an-evening-of-music-and-giving-in-support-of-seeds-of-hope-foundation/" target="_blank" rel="noopener">Buy tickets</a>
     <a class="ts-btn ts-auc" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Visit the auction</a>
@@ -3756,31 +3790,36 @@ document.addEventListener('click', function(e){
     var cta = document.querySelector('[data-auc-cta]'); if (cta) cta.innerHTML = 'See the auction <span aria-hidden="true">↗</span>';
   }
   function pad(n){ return (n < 10 ? '0' : '') + n; }
+  // ONE clock drives every countdown on the page (header, tickets section, sticky bar)
+  function setAll(label, time, msg){
+    if (tbLabel) tbLabel.textContent = label;
+    if (tbTime) tbTime.textContent = time;
+    if (stickySub) stickySub.textContent = time ? label + ' ' + time : label;
+    if (box){
+      var units = box.querySelector('[data-tc-units]'), lab = box.querySelector('[data-tc-label]'), m = box.querySelector('[data-tc-msg]');
+      lab.textContent = label;
+      if (msg){ units.hidden = true; m.hidden = false; m.textContent = msg; } else { units.hidden = false; m.hidden = true; }
+    }
+  }
   function tick(){
     var now = Date.now();
-    if (!box) return;
-    var units = box.querySelector('[data-tc-units]'), label = box.querySelector('[data-tc-label]'), msg = box.querySelector('[data-tc-msg]');
     if (now < DOORS){
       var t = Math.floor((DOORS - now) / 1000);
       var d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
-      box.querySelector('[data-tc="d"]').textContent = d;
-      box.querySelector('[data-tc="h"]').textContent = pad(h);
-      box.querySelector('[data-tc="m"]').textContent = pad(m);
-      box.querySelector('[data-tc="s"]').textContent = pad(s);
-      if (stickySub) stickySub.textContent = (d > 0 ? 'Doors in ' + d + 'd ' + h + 'h' : 'Tonight · doors 6:30 PM') + ' · $50';
-      if (tbTime) tbTime.textContent = (d > 0 ? d + 'd ' : '') + pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+      var time = (d > 0 ? d + 'd ' : '') + pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+      setAll('Doors open in', time, null);
+      if (box){
+        box.querySelector('[data-tc="d"]').textContent = d;
+        box.querySelector('[data-tc="h"]').textContent = pad(h);
+        box.querySelector('[data-tc="m"]').textContent = pad(m);
+        box.querySelector('[data-tc="s"]').textContent = pad(s);
+      }
     } else if (now < END){
-      units.hidden = true; msg.hidden = false;
-      label.textContent = 'Happening now';
-      msg.textContent = 'Doors are open at The Drake Underground.';
-      if (stickySub) stickySub.textContent = 'Happening now · The Drake Underground';
-      if (tbLabel){ tbLabel.textContent = 'Live now'; tbTime.textContent = 'Drake Underground'; }
+      setAll('Live now', 'The Drake Underground', 'Doors are open at The Drake Underground.');
     } else {
-      units.hidden = true; msg.hidden = false;
-      label.textContent = 'Thank you';
-      msg.textContent = 'Thank you for being part of Songs For Hope 2026.';
-      if (sticky) sticky.remove(), sticky = null;
-      if (tbLabel){ tbLabel.textContent = 'Thank you'; tbTime.textContent = 'See you next year'; }
+      setAll('Thank you', '', 'Thank you for being part of Songs For Hope 2026.');
+      if (tbTime) tbTime.textContent = 'See you next year';
+      if (sticky) sticky.remove(), sticky = null, stickySub = null;
       postEvent();
     }
   }
