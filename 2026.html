@@ -2757,6 +2757,31 @@ img{max-width:100%;display:block;}
   .auc-title{ font-size: 19px; }
 }
 
+
+/* ============ HERO BRIGHTNESS (2026 page) ============ */
+@keyframes heroFadeBright{
+  0%   {opacity:0;}
+  5%   {opacity:.95;}
+  20%  {opacity:.95;}
+  25%  {opacity:0;}
+  100% {opacity:0;}
+}
+.hero-photo{ animation-name: heroFadeBright; filter: saturate(1.12) contrast(1.04) brightness(1.08); }
+.hero-photo-overlay{
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 45%, rgba(0,0,0,0) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.08) 30%, rgba(0,0,0,.18) 60%, rgba(0,0,0,.78) 100%);
+}
+.hero-thesis{ text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+@media (max-width: 760px){
+  .hero-photo-overlay{
+    background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.22) 35%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.82) 100%);
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-photo:nth-child(1){opacity:.95;}
+}
+
 /* ============ STICKY TICKET BAR (phones) ============ */
 .tix-sticky{ position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
   display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 20px;
