@@ -2848,6 +2848,23 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
   .flow-result{ grid-column: auto !important; }
 }
 
+
+/* auction: 2-up grid on tablets, swipe carousel only on phones */
+@media (min-width: 601px) and (max-width: 900px){
+  .auc-grid{ display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; margin: 0 auto; padding: 0; gap: 16px; scroll-snap-type: none; }
+  .auc-card{ flex: none; }
+}
+
+
+/* short laptop screens: keep the whole hero (incl. buttons) on the first screen */
+@media (min-width: 761px) and (max-height: 860px){
+  .hero{ padding: 92px 0 44px; }
+  .hero-stage{ margin-bottom: 32px; }
+  .hero-thesis{ font-size: clamp(56px, min(8.4vw, 15.5vh), 156px); margin-bottom: 28px; }
+  .hero-grid-bottom{ margin-top: 28px; padding-top: 28px; }
+  .hero-set{ gap: 18px 48px; }
+}
+
 /* ============ STICKY ACTION BAR (all screens) ============ */
 .tix-sticky{ position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
   width: min(760px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 16px;
