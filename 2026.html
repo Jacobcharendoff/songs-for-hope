@@ -2782,6 +2782,38 @@ img{max-width:100%;display:block;}
   .hero-photo:nth-child(1){opacity:.95;}
 }
 
+
+/* auction cards with real item photos */
+.auc-card{ padding: 0; gap: 0; min-height: 0; }
+.auc-media{ position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 21px 21px 0 0; background: #111; }
+.auc-media img{ width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .4s ease; filter: saturate(1.05); }
+.auc-media.fit-contain{ background: #fff; }
+.auc-media.fit-contain img{ object-fit: contain; padding: 18px; box-sizing: border-box; }
+.auc-media::after{ content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35)); pointer-events: none; }
+.auc-card:hover .auc-media img{ transform: scale(1.06); }
+.auc-media .auc-bid{ position: absolute; top: 14px; right: 14px; padding: 7px 11px; border-radius: 999px; background: rgba(0,0,0,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #fff; border: 1px solid rgba(255,255,255,.2); }
+.auc-body{ display: flex; flex-direction: column; gap: 8px; padding: 22px 24px 24px; flex: 1; }
+.auc-body .auc-title{ margin-top: 2px; }
+@media (max-width: 900px){
+  .auc-card{ flex: 0 0 78%; }
+  .auc-body{ padding: 18px 20px 20px; }
+}
+
+/* header countdown */
+.tb-count{ position: absolute; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); background: rgba(0,0,0,.25); white-space: nowrap; }
+.topbar.on-light .tb-count{ border-color: rgba(0,0,0,.14); background: rgba(255,255,255,.4); }
+.tb-count b{ font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .08em; background: var(--grad-ai); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-drift 6s ease-in-out infinite; }
+.tb-count .tb-dot{ width: 6px; height: 6px; border-radius: 50%; background: #FF2D92; box-shadow: 0 0 0 0 rgba(255,45,146,.6); animation: tbPulse 2s ease-out infinite; }
+@keyframes tbPulse{ 0%{ box-shadow: 0 0 0 0 rgba(255,45,146,.55); } 70%{ box-shadow: 0 0 0 8px rgba(255,45,146,0); } 100%{ box-shadow: 0 0 0 0 rgba(255,45,146,0); } }
+@media (max-width: 760px){
+  .tb-count{ position: static; transform: none; padding: 5px 10px; gap: 7px; }
+  .topbar .right{ display: none; }
+}
+
+
+/* gradient italic headings: never clip the italic overhang, even across line breaks */
+h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-right: .1em; }
+
 /* ============ STICKY ACTION BAR (all screens) ============ */
 .tix-sticky{ position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
   width: min(760px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -2845,6 +2877,7 @@ img{max-width:100%;display:block;}
 <!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="left"><span class="dot"></span>SONGS&nbsp;FOR&nbsp;HOPE&nbsp;·&nbsp;2026</div>
+  <div class="tb-count" data-tb-count><span class="tb-dot"></span><span data-tb-label>Doors in</span><b data-tb-time>--</b></div>
   <div class="right">
     <span>Drake Underground</span>
     <span>Toronto</span>
@@ -3469,40 +3502,58 @@ img{max-width:100%;display:block;}
       </div>
       <div class="auc-grid reveal">
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/405eb4ce-5833-4b00-b82a-0b48ff73830d" target="_blank" rel="noopener" style="--i:0">
-          <span class="auc-cat">Fine Art</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">Jonathan Dunkelman, <em>Untitled</em> (2015)</span>
-          <span class="auc-sub">40" × 40" acrylic and oil on canvas</span>
-          <span class="auc-val">Value $3,500</span>
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-dunkelman.jpg" alt="Jonathan Dunkelman, Untitled (2015), red acrylic and oil on canvas" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Fine Art</span>
+            <span class="auc-title">Jonathan Dunkelman, <em>Untitled</em> (2015)</span>
+            <span class="auc-sub">40" × 40" acrylic and oil on canvas</span>
+            <span class="auc-val">Value $3,500</span>
+          </span>
         </a>
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/abfd374d-83a0-437d-b5f6-b85d278bd604" target="_blank" rel="noopener" style="--i:1">
-          <span class="auc-cat">Experience</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">A private baking class with Cordon Bleu chef Joanne Yolles</span>
-          <span class="auc-sub">Three hours, hands-on, for four guests</span>
-          <span class="auc-val">Value $720</span>
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-yolles.jpg" alt="Pastry chef Joanne Yolles" loading="lazy" decoding="async" style="object-position:center 25%"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Experience</span>
+            <span class="auc-title">A private baking class with Cordon Bleu chef Joanne Yolles</span>
+            <span class="auc-sub">Three hours, hands-on, for four guests</span>
+            <span class="auc-val">Value $720</span>
+          </span>
         </a>
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/57a4c563-afe3-4dcf-b67d-94db98c611e6" target="_blank" rel="noopener" style="--i:2">
-          <span class="auc-cat">Signed Memorabilia</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">Vladimir Guerrero Jr. autographed baseball</span>
-          <span class="auc-sub">Toronto Blue Jays · authenticated</span>
-          <span class="auc-val">Value $500</span>
+          <span class="auc-media fit-contain"><img src="/photos/sfh2026-auc-guerrero.jpg" alt="Baseball autographed by Vladimir Guerrero Jr." loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Signed Memorabilia</span>
+            <span class="auc-title">Vladimir Guerrero Jr. autographed baseball</span>
+            <span class="auc-sub">Toronto Blue Jays · authenticated</span>
+            <span class="auc-val">Value $500</span>
+          </span>
         </a>
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/432c0a6b-b88c-45b7-ab80-47370a1897b3" target="_blank" rel="noopener" style="--i:3">
-          <span class="auc-cat">Stay</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">A night at the Ace Hotel</span>
-          <span class="auc-sub">Standard queen room · subject to availability</span>
-          <span class="auc-val">Value $500</span>
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-ace.jpg" alt="The Ace Hotel building at dusk" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Stay</span>
+            <span class="auc-title">A night at the Ace Hotel</span>
+            <span class="auc-sub">Standard queen room · subject to availability</span>
+            <span class="auc-val">Value $500</span>
+          </span>
         </a>
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/6d7e1759-8b94-4be4-acd5-c35a3cc8e8fb" target="_blank" rel="noopener" style="--i:4">
-          <span class="auc-cat">Theatre</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">Two tickets to <em>Dirty Dancing</em>, The Musical</span>
-          <span class="auc-sub">Mirvish · Orchestra Row B · Thursday, December 3</span>
-          <span class="auc-val">Value $400</span>
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-dirtydancing.jpg" alt="Dirty Dancing, The Musical poster" loading="lazy" decoding="async" style="object-position:center 30%"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Theatre</span>
+            <span class="auc-title">Two tickets to <em>Dirty Dancing</em>, The Musical</span>
+            <span class="auc-sub">Mirvish · Orchestra Row B · Thursday, December 3</span>
+            <span class="auc-val">Value $400</span>
+          </span>
         </a>
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/4940de31-3fed-4114-9cc8-b9c4675fb9e8" target="_blank" rel="noopener" style="--i:5">
-          <span class="auc-cat">Fine Wine</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
-          <span class="auc-title">Spottswoode Estate Cabernet Sauvignon, 2005</span>
-          <span class="auc-sub">Napa Valley</span>
-          <span class="auc-val">Value $300</span>
+          <span class="auc-media fit-contain"><img src="/photos/sfh2026-auc-spottswoode.jpg" alt="Bottle of 2005 Spottswoode Cabernet Sauvignon" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Fine Wine</span>
+            <span class="auc-title">Spottswoode Estate Cabernet Sauvignon, 2005</span>
+            <span class="auc-sub">Napa Valley</span>
+            <span class="auc-val">Value $300</span>
+          </span>
         </a>
       </div>
       <p class="auc-live reveal">Bid live on the night: a <b>Nuova Simonelli espresso machine</b> (value $2,750) and a <b>14kt white gold diamond necklace</b> from Fine Jewellery by Colette (value $2,700).</p>
@@ -3691,6 +3742,7 @@ document.addEventListener('click', function(e){
   var box = document.getElementById('tixCount');
   var sticky = document.getElementById('tixSticky');
   var stickySub = sticky ? sticky.querySelector('[data-ts-sub]') : null;
+  var tbLabel = document.querySelector('[data-tb-label]'), tbTime = document.querySelector('[data-tb-time]');
   var DONATE = 'https://www.canadahelps.org/en/dn/12446', postDone = false;
   function postEvent(){
     if (postDone) return; postDone = true;
@@ -3716,16 +3768,19 @@ document.addEventListener('click', function(e){
       box.querySelector('[data-tc="m"]').textContent = pad(m);
       box.querySelector('[data-tc="s"]').textContent = pad(s);
       if (stickySub) stickySub.textContent = (d > 0 ? 'Doors in ' + d + 'd ' + h + 'h' : 'Tonight · doors 6:30 PM') + ' · $50';
+      if (tbTime) tbTime.textContent = (d > 0 ? d + 'd ' : '') + pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
     } else if (now < END){
       units.hidden = true; msg.hidden = false;
       label.textContent = 'Happening now';
       msg.textContent = 'Doors are open at The Drake Underground.';
       if (stickySub) stickySub.textContent = 'Happening now · The Drake Underground';
+      if (tbLabel){ tbLabel.textContent = 'Live now'; tbTime.textContent = 'Drake Underground'; }
     } else {
       units.hidden = true; msg.hidden = false;
       label.textContent = 'Thank you';
       msg.textContent = 'Thank you for being part of Songs For Hope 2026.';
       if (sticky) sticky.remove(), sticky = null;
+      if (tbLabel){ tbLabel.textContent = 'Thank you'; tbTime.textContent = 'See you next year'; }
       postEvent();
     }
   }
