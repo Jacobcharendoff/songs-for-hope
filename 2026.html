@@ -2675,9 +2675,9 @@ img{max-width:100%;display:block;}
 .tc-msg{ font-size: clamp(20px, 2.2vw, 28px); font-weight: 300; color: var(--grey-4); }
 .tix-grid{ display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 72px; align-items: center; max-width: 1120px; margin: 0 auto; }
 .tix-stage{ position: relative; perspective: 1400px; }
-.tix-stage::before{ content: ""; position: absolute; inset: -14%; z-index: 0; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255,159,10,.55), rgba(255,45,146,.28) 45%, rgba(88,86,214,.18) 65%, transparent 78%);
-  filter: blur(40px); opacity: .85; }
+.tix-stage::before{ content: ""; position: absolute; inset: -12% -38%; z-index: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255,159,10,.62) 0%, rgba(255,45,146,.36) 32%, rgba(88,86,214,.24) 52%, transparent 70%);
+  filter: blur(46px); opacity: .95; pointer-events: none; }
 .tix-poster{ position: relative; z-index: 1; }
 .tix-poster img{ width: 100%; height: auto; display: block; border-radius: 22px;
   box-shadow: 0 50px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
@@ -3594,9 +3594,9 @@ document.addEventListener('click', function(e){
   // Sticky bar: show after the hero, hide while the tickets section is on screen
   if (sticky && 'IntersectionObserver' in window){
     var pastHero = false, onTickets = false;
-    var hero = document.getElementById('hero'), tix = document.getElementById('tickets');
+    var heroCta = document.querySelector('.hero-actions'), tix = document.getElementById('tickets');
     function sync(){ if (sticky) sticky.classList.toggle('show', pastHero && !onTickets); }
-    new IntersectionObserver(function(e){ pastHero = !e[0].isIntersecting; sync(); }, {threshold: 0}).observe(hero);
+    new IntersectionObserver(function(e){ pastHero = !e[0].isIntersecting; sync(); }, {threshold: 0}).observe(heroCta);
     new IntersectionObserver(function(e){ onTickets = e[0].isIntersecting; sync(); }, {threshold: 0.15}).observe(tix);
   }
 
