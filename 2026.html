@@ -2715,6 +2715,48 @@ img{max-width:100%;display:block;}
   .tix-btn{ width: 100%; justify-content: center; }
 }
 
+
+/* ============ AUCTION HIGHLIGHTS ============ */
+.auc{ margin-top: 130px; padding-top: 90px; border-top: 1px solid rgba(255,255,255,.08); }
+.auc-head{ max-width: 780px; margin: 0 auto 52px; text-align: center; }
+.auc-head .tix-k{ justify-content: center; }
+.auc-head h3{ font-size: clamp(36px, 4.6vw, 68px); font-weight: 500; letter-spacing: -.045em; line-height: 1; margin: 0 0 20px; color: #fff; }
+.auc-head h3 em{ font-style: italic; background: var(--grad-ai); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-drift 8s ease-in-out infinite; padding-right: .06em; }
+.auc-head p{ font-size: 18px; line-height: 1.5; color: var(--grey-3); font-weight: 300; margin: 0; }
+.auc-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; max-width: 1120px; margin: 0 auto; }
+.auc-card{ position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 230px; padding: 28px 26px 26px; border-radius: 22px;
+  background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); color: #fff; text-decoration: none; overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), background .35s ease, border-color .35s ease; }
+.auc-card::after{ content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: var(--grad-ai); background-size: 200% 200%; animation: gradient-drift 8s ease-in-out infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .35s ease; }
+.auc-card:hover{ transform: translateY(-5px); background: rgba(255,255,255,.06); border-color: transparent; }
+.auc-card:hover::after{ opacity: 1; }
+.auc-card:focus-visible{ outline: 3px solid #fff; outline-offset: 3px; }
+.auc-cat{ font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey-3); }
+.auc-bid{ position: absolute; top: 26px; right: 24px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-1); transition: color .3s ease; }
+.auc-card:hover .auc-bid{ color: #fff; }
+.auc-title{ font-size: 21px; font-weight: 500; letter-spacing: -.02em; line-height: 1.22; margin-top: 6px; }
+.auc-sub{ font-size: 14px; line-height: 1.45; color: var(--grey-1); }
+.auc-val{ margin-top: auto; padding-top: 12px; font-size: 15px; font-weight: 600; background: var(--grad-ai); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-drift 8s ease-in-out infinite; align-self: flex-start; }
+.auc-live{ max-width: 780px; margin: 40px auto 0; text-align: center; font-size: 16px; line-height: 1.6; color: var(--grey-3); font-weight: 300; }
+.auc-live b{ color: #fff; font-weight: 500; }
+.auc-cta{ text-align: center; margin-top: 34px; }
+@media (prefers-reduced-motion: no-preference){
+  .auc-grid:not(.in) .auc-card{ opacity: 0; }
+  .auc-grid.in .auc-card{ animation: spIn .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i,0) * 90ms + 100ms); }
+}
+@media (max-width: 900px){
+  .auc{ margin-top: 84px; padding-top: 60px; }
+  .auc-head{ margin-bottom: 32px; }
+  .auc-head p{ font-size: 16px; }
+  .auc-grid{ display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -22px; padding: 4px 22px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .auc-grid::-webkit-scrollbar{ display: none; }
+  .auc-card{ flex: 0 0 80%; scroll-snap-align: start; min-height: 210px; padding: 24px 22px 22px; }
+  .auc-title{ font-size: 19px; }
+}
+
 /* ============ STICKY TICKET BAR (phones) ============ */
 .tix-sticky{ position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
   display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 20px;
@@ -3384,6 +3426,55 @@ img{max-width:100%;display:block;}
         </div>
       </div>
     </div>
+    <div class="auc" id="auction">
+      <div class="auc-head">
+        <div class="tix-k reveal"><span class="grad-dot"></span>Auction Highlights</div>
+        <h3 class="reveal reveal-1">75+ items, valued at over <em>$22,000.</em></h3>
+        <p class="reveal reveal-2" data-auc-status>Bidding is open online now and closes Saturday night. Starting bids from $10.</p>
+      </div>
+      <div class="auc-grid reveal">
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/405eb4ce-5833-4b00-b82a-0b48ff73830d" target="_blank" rel="noopener" style="--i:0">
+          <span class="auc-cat">Fine Art</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">Jonathan Dunkelman, <em>Untitled</em> (2015)</span>
+          <span class="auc-sub">40" × 40" acrylic and oil on canvas</span>
+          <span class="auc-val">Value $3,500</span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/abfd374d-83a0-437d-b5f6-b85d278bd604" target="_blank" rel="noopener" style="--i:1">
+          <span class="auc-cat">Experience</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">A private baking class with Cordon Bleu chef Joanne Yolles</span>
+          <span class="auc-sub">Three hours, hands-on, for four guests</span>
+          <span class="auc-val">Value $720</span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/57a4c563-afe3-4dcf-b67d-94db98c611e6" target="_blank" rel="noopener" style="--i:2">
+          <span class="auc-cat">Signed Memorabilia</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">Vladimir Guerrero Jr. autographed baseball</span>
+          <span class="auc-sub">Toronto Blue Jays · authenticated</span>
+          <span class="auc-val">Value $500</span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/432c0a6b-b88c-45b7-ab80-47370a1897b3" target="_blank" rel="noopener" style="--i:3">
+          <span class="auc-cat">Stay</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">A night at the Ace Hotel</span>
+          <span class="auc-sub">Standard queen room · subject to availability</span>
+          <span class="auc-val">Value $500</span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/6d7e1759-8b94-4be4-acd5-c35a3cc8e8fb" target="_blank" rel="noopener" style="--i:4">
+          <span class="auc-cat">Theatre</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">Two tickets to <em>Dirty Dancing</em>, The Musical</span>
+          <span class="auc-sub">Mirvish · Orchestra Row B · Thursday, December 3</span>
+          <span class="auc-val">Value $400</span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/4940de31-3fed-4114-9cc8-b9c4675fb9e8" target="_blank" rel="noopener" style="--i:5">
+          <span class="auc-cat">Fine Wine</span><span class="auc-bid" aria-hidden="true">Bid ↗</span>
+          <span class="auc-title">Spottswoode Estate Cabernet Sauvignon, 2005</span>
+          <span class="auc-sub">Napa Valley</span>
+          <span class="auc-val">Value $300</span>
+        </a>
+      </div>
+      <p class="auc-live reveal">Bid live on the night: a <b>Nuova Simonelli espresso machine</b> (value $2,750) and a <b>14kt white gold diamond necklace</b> from Fine Jewellery by Colette (value $2,700).</p>
+      <div class="auc-cta reveal">
+        <a class="tix-btn tix-btn-line" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener" data-auc-cta>See all items and bid <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -3562,6 +3653,18 @@ document.addEventListener('click', function(e){
   var box = document.getElementById('tixCount');
   var sticky = document.getElementById('tixSticky');
   var stickySub = sticky ? sticky.querySelector('[data-ts-sub]') : null;
+  var DONATE = 'https://www.canadahelps.org/en/dn/12446', postDone = false;
+  function postEvent(){
+    if (postDone) return; postDone = true;
+    var hb = document.querySelector('.hero-actions .btn-grad');
+    if (hb){ hb.href = DONATE; hb.innerHTML = 'Donate <span class="arrow">→</span>'; }
+    var tb = document.querySelector('.tix-btn-fill');
+    if (tb){ tb.href = DONATE; tb.innerHTML = 'Donate to Seeds of Hope <span aria-hidden="true">↗</span>'; }
+    var note = document.querySelector('.tix-note'); if (note) note.hidden = true;
+    var first = document.querySelector('.tix-card p'); if (first) first.textContent = 'The night is over, but the work goes on all year. Donations are always welcome.';
+    var st = document.querySelector('[data-auc-status]'); if (st) st.textContent = 'Bidding has closed. Thank you to everyone who donated an item or placed a bid.';
+    var cta = document.querySelector('[data-auc-cta]'); if (cta) cta.innerHTML = 'See the auction <span aria-hidden="true">↗</span>';
+  }
   function pad(n){ return (n < 10 ? '0' : '') + n; }
   function tick(){
     var now = Date.now();
@@ -3585,6 +3688,7 @@ document.addEventListener('click', function(e){
       label.textContent = 'Thank you';
       msg.textContent = 'Thank you for being part of Songs For Hope 2026.';
       if (sticky) sticky.remove(), sticky = null;
+      postEvent();
     }
   }
   tick(); setInterval(tick, 1000);
@@ -3613,5 +3717,6 @@ document.addEventListener('click', function(e){
   }
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
