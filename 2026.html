@@ -2865,6 +2865,27 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
   .hero-set{ gap: 18px 48px; }
 }
 
+
+/* ============ AUCTION v2: 8 items, value + live bid, chips ============ */
+.auc-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 1240px; }
+.auc-nums{ margin-top: auto; padding-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.08); }
+.auc-nums .auc-val{ margin-top: 0; padding-top: 0; }
+.auc-cur{ font-size: 14px; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
+.auc-body .auc-title{ font-size: 18px; }
+.auc-flag{ position: absolute; top: 14px; left: 14px; padding: 7px 11px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #fff; background: rgba(175,82,222,.75); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.auc-chips{ display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 980px; margin: 44px auto 0; }
+.auc-chip{ display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); color: var(--grey-4); font-size: 13px; text-decoration: none; transition: border-color .25s ease, background .25s ease, color .25s ease; }
+.auc-chip b{ font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--grey-1); }
+.auc-chip:hover{ border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.05); color: #fff; }
+.auc-cta{ margin-top: 40px; }
+@media (max-width: 1100px) and (min-width: 601px){
+  .auc-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 600px){
+  .auc-chips{ justify-content: flex-start; gap: 6px; margin-top: 28px; }
+  .auc-chip{ font-size: 12px; padding: 8px 12px; }
+}
+
 /* ============ STICKY ACTION BAR (all screens) ============ */
 .tix-sticky{ position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 1000;
   width: min(760px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -3547,69 +3568,101 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
     </div>
     <div class="auc" id="auction">
       <div class="auc-head">
-        <div class="tix-k reveal"><span class="grad-dot"></span>Auction Highlights</div>
-        <h3 class="reveal reveal-1">75+ items, valued at over <em>$22,000.</em></h3>
-        <p class="reveal reveal-2" data-auc-status>Bidding is open online now and closes Saturday night. Starting bids from $10.</p>
+        <div class="tix-k reveal"><span class="grad-dot"></span>The Auction</div>
+        <h3 class="reveal reveal-1"><span data-auc-n>174</span> items. <em>Most still at their opening bid.</em></h3>
+        <p class="reveal reveal-2" data-auc-status><b data-auc-open>154</b> of <span data-auc-n>174</span> items have no bids yet. Bids start at $5 and bidding closes Saturday night.</p>
       </div>
       <div class="auc-grid reveal">
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/405eb4ce-5833-4b00-b82a-0b48ff73830d" target="_blank" rel="noopener" style="--i:0">
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/5e66f016-8b10-4ec2-b4d5-9cd02efae225" target="_blank" rel="noopener" data-uuid="5e66f016-8b10-4ec2-b4d5-9cd02efae225" style="--i:0">
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-ferrari.jpg" alt="Ferrari experience in Modena, Italy" loading="lazy" decoding="async" style="object-position:50% 30%"><span class="auc-flag">Sealed bid</span><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Luxury Travel</span>
+            <span class="auc-title">Five nights in Modena: the Ferrari experience for two</span>
+            <span class="auc-sub">Drives, the Ferrari museum and factory, Italian cuisine</span>
+            <span class="auc-nums"><span class="auc-val">Sealed bid</span><span class="auc-cur" data-live>Minimum $7,500</span></span>
+          </span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/2d5e2db3-a1e3-4307-ad50-bddacf86c3bd" target="_blank" rel="noopener" data-uuid="2d5e2db3-a1e3-4307-ad50-bddacf86c3bd" style="--i:1">
+          <span class="auc-media fit-contain"><img src="/photos/sfh2026-auc-curry.jpg" alt="Framed Steph Curry signed Warriors jersey" loading="lazy" decoding="async" style="object-position:center"><span class="auc-flag">Sealed bid</span><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Signed Memorabilia</span>
+            <span class="auc-title">Steph Curry signed Golden State Warriors jersey</span>
+            <span class="auc-sub">Framed, 36" × 44"</span>
+            <span class="auc-nums"><span class="auc-val">Sealed bid</span><span class="auc-cur" data-live>Minimum $2,000</span></span>
+          </span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/405eb4ce-5833-4b00-b82a-0b48ff73830d" target="_blank" rel="noopener" data-uuid="405eb4ce-5833-4b00-b82a-0b48ff73830d" style="--i:2">
           <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-dunkelman.jpg" alt="Jonathan Dunkelman, Untitled (2015), red acrylic and oil on canvas" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
           <span class="auc-body">
             <span class="auc-cat">Fine Art</span>
             <span class="auc-title">Jonathan Dunkelman, <em>Untitled</em> (2015)</span>
             <span class="auc-sub">40" × 40" acrylic and oil on canvas</span>
-            <span class="auc-val">Value $3,500</span>
+            <span class="auc-nums"><span class="auc-val">Value $3,500</span><span class="auc-cur" data-live>Opening bid $500</span></span>
           </span>
         </a>
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/abfd374d-83a0-437d-b5f6-b85d278bd604" target="_blank" rel="noopener" style="--i:1">
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/ceb385c8-0f52-43a5-97ec-98eb954d4808" target="_blank" rel="noopener" data-uuid="ceb385c8-0f52-43a5-97ec-98eb954d4808" style="--i:3">
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-pachter.jpg" alt="Charles Pachter, Canadian Flag lithograph" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Fine Art</span>
+            <span class="auc-title">Charles Pachter, <em>Canadian Flag</em> (1981)</span>
+            <span class="auc-sub">Lithograph, 4/100, signed</span>
+            <span class="auc-nums"><span class="auc-val">Value $1,200</span><span class="auc-cur" data-live>Opening bid $300</span></span>
+          </span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/c113f99c-1aac-4c61-842b-d45645343dc7" target="_blank" rel="noopener" data-uuid="c113f99c-1aac-4c61-842b-d45645343dc7" style="--i:4">
+          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-bowie.jpg" alt="David Bowie Meltdown 2002 tour poster" loading="lazy" decoding="async" style="object-position:50% 30%"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
+          <span class="auc-body">
+            <span class="auc-cat">Collectible</span>
+            <span class="auc-title">David Bowie <em>Meltdown</em> tour poster</span>
+            <span class="auc-sub">Original, 60" × 40"</span>
+            <span class="auc-nums"><span class="auc-val">Value $950</span><span class="auc-cur" data-live>Opening bid $200</span></span>
+          </span>
+        </a>
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/abfd374d-83a0-437d-b5f6-b85d278bd604" target="_blank" rel="noopener" data-uuid="abfd374d-83a0-437d-b5f6-b85d278bd604" style="--i:5">
           <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-yolles.jpg" alt="Pastry chef Joanne Yolles" loading="lazy" decoding="async" style="object-position:center 25%"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
           <span class="auc-body">
             <span class="auc-cat">Experience</span>
             <span class="auc-title">A private baking class with Cordon Bleu chef Joanne Yolles</span>
             <span class="auc-sub">Three hours, hands-on, for four guests</span>
-            <span class="auc-val">Value $720</span>
+            <span class="auc-nums"><span class="auc-val">Value $720</span><span class="auc-cur" data-live>Opening bid $300</span></span>
           </span>
         </a>
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/57a4c563-afe3-4dcf-b67d-94db98c611e6" target="_blank" rel="noopener" style="--i:2">
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/57a4c563-afe3-4dcf-b67d-94db98c611e6" target="_blank" rel="noopener" data-uuid="57a4c563-afe3-4dcf-b67d-94db98c611e6" style="--i:6">
           <span class="auc-media fit-contain"><img src="/photos/sfh2026-auc-guerrero.jpg" alt="Baseball autographed by Vladimir Guerrero Jr." loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
           <span class="auc-body">
             <span class="auc-cat">Signed Memorabilia</span>
             <span class="auc-title">Vladimir Guerrero Jr. autographed baseball</span>
             <span class="auc-sub">Toronto Blue Jays · authenticated</span>
-            <span class="auc-val">Value $500</span>
+            <span class="auc-nums"><span class="auc-val">Value $500</span><span class="auc-cur" data-live>Current bid $500</span></span>
           </span>
         </a>
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/432c0a6b-b88c-45b7-ab80-47370a1897b3" target="_blank" rel="noopener" style="--i:3">
+        <a class="auc-card" href="https://app.galabid.com/soh2026/items/432c0a6b-b88c-45b7-ab80-47370a1897b3" target="_blank" rel="noopener" data-uuid="432c0a6b-b88c-45b7-ab80-47370a1897b3" style="--i:7">
           <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-ace.jpg" alt="The Ace Hotel building at dusk" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
           <span class="auc-body">
             <span class="auc-cat">Stay</span>
             <span class="auc-title">A night at the Ace Hotel</span>
             <span class="auc-sub">Standard queen room · subject to availability</span>
-            <span class="auc-val">Value $500</span>
-          </span>
-        </a>
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/6d7e1759-8b94-4be4-acd5-c35a3cc8e8fb" target="_blank" rel="noopener" style="--i:4">
-          <span class="auc-media fit-cover"><img src="/photos/sfh2026-auc-dirtydancing.jpg" alt="Dirty Dancing, The Musical poster" loading="lazy" decoding="async" style="object-position:center 30%"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
-          <span class="auc-body">
-            <span class="auc-cat">Theatre</span>
-            <span class="auc-title">Two tickets to <em>Dirty Dancing</em>, The Musical</span>
-            <span class="auc-sub">Mirvish · Orchestra Row B · Thursday, December 3</span>
-            <span class="auc-val">Value $400</span>
-          </span>
-        </a>
-        <a class="auc-card" href="https://app.galabid.com/soh2026/items/4940de31-3fed-4114-9cc8-b9c4675fb9e8" target="_blank" rel="noopener" style="--i:5">
-          <span class="auc-media fit-contain"><img src="/photos/sfh2026-auc-spottswoode.jpg" alt="Bottle of 2005 Spottswoode Cabernet Sauvignon" loading="lazy" decoding="async" style="object-position:center"><span class="auc-bid" aria-hidden="true">Bid ↗</span></span>
-          <span class="auc-body">
-            <span class="auc-cat">Fine Wine</span>
-            <span class="auc-title">Spottswoode Estate Cabernet Sauvignon, 2005</span>
-            <span class="auc-sub">Napa Valley</span>
-            <span class="auc-val">Value $300</span>
+            <span class="auc-nums"><span class="auc-val">Value $500</span><span class="auc-cur" data-live>Opening bid $200</span></span>
           </span>
         </a>
       </div>
+      <div class="auc-chips reveal">
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Sealed-bid travel &amp; collectibles <b>86</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Restaurants <b>14</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Sporting goods <b>13</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Fine wines <b>8</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Jewellery <b>8</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Toys &amp; games <b>8</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Spa &amp; beauty <b>6</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Signed books <b>6</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Signed memorabilia <b>4</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Fine art <b>4</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Theatre &amp; events <b>3</b></a>
+        <a class="auc-chip" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener">Experiences <b>3</b></a>
+      </div>
       <p class="auc-live reveal">Bid live on the night: a <b>Nuova Simonelli espresso machine</b> (value $2,750) and a <b>14kt white gold diamond necklace</b> from Fine Jewellery by Colette (value $2,700).</p>
       <div class="auc-cta reveal">
-        <a class="tix-btn tix-btn-line" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener" data-auc-cta>See all items and bid <span aria-hidden="true">↗</span></a>
+        <a class="tix-btn tix-btn-fill" href="https://app.galabid.com/soh2026/items" target="_blank" rel="noopener" data-auc-cta>Browse all <span data-auc-n>174</span> items <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </div>
@@ -3867,5 +3920,34 @@ document.addEventListener('click', function(e){
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+
+<script>
+(function(){
+  var AUC = document.getElementById('auction'); if (!AUC || !window.fetch) return;
+  var END = Date.UTC(2026, 10, 15, 3, 30), done = false;
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-CA'); }
+  function load(){
+    if (done) return; done = true;
+    fetch('https://api.galabid.com/api/app/auctions/soh2026/items/?limit=400&offset=0').then(function(r){ return r.json(); }).then(function(j){
+      var real = (j.results || []).filter(function(x){ return !/^\s*--/.test(x.name || '') && x.bidding_item; });
+      if (!real.length) return;
+      var open = real.filter(function(x){ return x.bidding_item.minimum_next_bid <= x.bidding_item.starting_price; }).length;
+      document.querySelectorAll('[data-auc-n]').forEach(function(el){ el.textContent = real.length; });
+      var o = document.querySelector('[data-auc-open]'); if (o && Date.now() < END) o.textContent = open;
+      AUC.querySelectorAll('.auc-card[data-uuid]').forEach(function(card){
+        var it = real.find(function(x){ return x.uuid === card.getAttribute('data-uuid'); });
+        var el = card.querySelector('[data-live]'); if (!it || !el) return;
+        var b = it.bidding_item;
+        if (b.sealed_bid_item){ el.textContent = 'Minimum ' + money(b.starting_price); }
+        else if (b.minimum_next_bid > b.starting_price){ el.textContent = 'Current bid ' + money(b.minimum_next_bid - b.minimum_increment); }
+        else { el.textContent = 'Opening bid ' + money(b.starting_price); }
+      });
+    }).catch(function(){});
+  }
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(e, obs){ if (e[0].isIntersecting){ load(); obs.disconnect(); } }, {rootMargin: '900px 0px'}).observe(AUC);
+  } else { load(); }
+})();
+</script>
 </body>
 </html>
