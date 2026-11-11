@@ -3080,7 +3080,7 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
             <div class="n">B2</div>
             <div class="ico"><svg><use href="#i-trophy"/></svg></div>
             <div class="t">50/50 Draw &amp; Silent Auction<span class="sub">Silent Auction ends · 50/50 winner announced</span></div>
-            <div class="time">9:30 PM</div>
+            <div class="time">9:00 PM</div>
           </div>
         </div>
       </div>
@@ -3570,7 +3570,7 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
       <div class="auc-head">
         <div class="tix-k reveal"><span class="grad-dot"></span>The Auction</div>
         <h3 class="reveal reveal-1"><span data-auc-n>174</span> items. <em>Most still at their opening bid.</em></h3>
-        <p class="reveal reveal-2" data-auc-status><b data-auc-open>154</b> of <span data-auc-n>174</span> items have no bids yet. Bids start at $5 and bidding closes Saturday night.</p>
+        <p class="reveal reveal-2" data-auc-status><b data-auc-open>154</b> of <span data-auc-n>174</span> items have no bids yet. Bids start at $5 and bidding closes Saturday at 9:00 PM.</p>
       </div>
       <div class="auc-grid reveal">
         <a class="auc-card" href="https://app.galabid.com/soh2026/items/5e66f016-8b10-4ec2-b4d5-9cd02efae225" target="_blank" rel="noopener" data-uuid="5e66f016-8b10-4ec2-b4d5-9cd02efae225" style="--i:0">
@@ -3843,6 +3843,7 @@ document.addEventListener('click', function(e){
 (function(){
   var DOORS = Date.UTC(2026, 10, 14, 23, 30);   // Sat Nov 14 2026, 6:30 PM Toronto
   var END   = Date.UTC(2026, 10, 15, 3, 30);    // 10:30 PM Toronto
+  var AUC_END = Date.UTC(2026, 10, 15, 2, 0);   // 9:00 PM Toronto, silent auction closes
   var box = document.getElementById('tixCount');
   var sticky = document.getElementById('tixSticky');
   var stickySub = sticky ? sticky.querySelector('[data-ts-sub]') : null;
@@ -3856,8 +3857,14 @@ document.addEventListener('click', function(e){
     if (tb){ tb.href = DONATE; tb.innerHTML = 'Donate to Seeds of Hope <span aria-hidden="true">↗</span>'; }
     var note = document.querySelector('.tix-note'); if (note) note.hidden = true;
     var first = document.querySelector('.tix-card p'); if (first) first.textContent = 'The night is over, but the work goes on all year. Donations are always welcome.';
+    aucClosed();
+  }
+  var aucDone = false;
+  function aucClosed(){
+    if (aucDone) return; aucDone = true;
     var st = document.querySelector('[data-auc-status]'); if (st) st.textContent = 'Bidding has closed. Thank you to everyone who donated an item or placed a bid.';
     var cta = document.querySelector('[data-auc-cta]'); if (cta) cta.innerHTML = 'See the auction <span aria-hidden="true">↗</span>';
+    var sa = document.querySelector('.ts-auc'); if (sa) sa.textContent = 'See the auction';
   }
   function pad(n){ return (n < 10 ? '0' : '') + n; }
   // ONE clock drives every countdown on the page (header, tickets section, sticky bar)
@@ -3873,6 +3880,7 @@ document.addEventListener('click', function(e){
   }
   function tick(){
     var now = Date.now();
+    if (now >= AUC_END) aucClosed();
     if (now < DOORS){
       var t = Math.floor((DOORS - now) / 1000);
       var d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
@@ -3924,7 +3932,7 @@ document.addEventListener('click', function(e){
 <script>
 (function(){
   var AUC = document.getElementById('auction'); if (!AUC || !window.fetch) return;
-  var END = Date.UTC(2026, 10, 15, 3, 30), done = false;
+  var END = Date.UTC(2026, 10, 15, 2, 0), done = false;   // 9:00 PM Toronto, silent auction closes
   function money(n){ return '$' + Math.round(n).toLocaleString('en-CA'); }
   function load(){
     if (done) return; done = true;
