@@ -2919,6 +2919,42 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
   .ts-actions{ width: 100%; }
   .ts-btn{ flex: 1; padding: 14px 10px; font-size: 15px; border-radius: 12px; }
 }
+
+/* ============ SECTION NAV (homepage) ============ */
+.topbar .left{pointer-events:auto; color:inherit; text-decoration:none;}
+.tb-nav{position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:30px; pointer-events:auto;
+  font-family:'Inter',sans-serif; font-size:13.5px; font-weight:500; letter-spacing:-.005em; text-transform:none;}
+.tb-nav a{color:inherit; text-decoration:none; opacity:.74; position:relative; padding:6px 0; transition:opacity .2s ease;}
+.tb-nav a:hover, .tb-nav a:focus-visible{opacity:1; outline:none;}
+.tb-nav a.is-active{opacity:1;}
+.tb-nav a.is-active::after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; border-radius:2px; background:var(--grad-ai);}
+.tb-count{position:static; transform:none; pointer-events:auto; color:inherit; text-decoration:none; transition:background .2s ease, border-color .2s ease;}
+.tb-count:hover{border-color:rgba(255,255,255,.4);}
+.topbar.on-light .tb-count:hover{border-color:rgba(0,0,0,.3);}
+.tb-menu{display:none; pointer-events:auto; align-items:center; gap:8px; appearance:none; -webkit-appearance:none; cursor:pointer;
+  background:rgba(0,0,0,.25); color:inherit; border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:6px 13px 6px 11px;
+  font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600; letter-spacing:0; text-transform:none;}
+.topbar.on-light .tb-menu{background:rgba(255,255,255,.45); border-color:rgba(0,0,0,.14);}
+.tb-burger{display:inline-flex; flex-direction:column; gap:4px; width:14px;}
+.tb-burger i{display:block; height:1.6px; border-radius:2px; background:currentColor; transition:transform .25s ease;}
+.tb-menu[aria-expanded="true"] .tb-burger i:first-child{transform:translateY(2.8px) rotate(45deg);}
+.tb-menu[aria-expanded="true"] .tb-burger i:last-child{transform:translateY(-2.8px) rotate(-45deg);}
+.tb-sheet{position:fixed; top:58px; left:12px; right:12px; z-index:59; padding:8px; border-radius:22px;
+  background:rgba(12,12,16,.94); backdrop-filter:blur(18px) saturate(1.2); -webkit-backdrop-filter:blur(18px) saturate(1.2);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.08);}
+.tb-sheet a{display:block; padding:15px 16px; color:#fff; text-decoration:none; font-family:'Inter',sans-serif; font-size:21px; font-weight:600; letter-spacing:-.02em; border-bottom:1px solid rgba(255,255,255,.08);}
+.tb-sheet a:last-child{border-bottom:0;}
+.tb-sheet .tb-sheet-cta{margin-top:8px; text-align:center; border-radius:14px; font-size:17px; background:linear-gradient(110deg,#FF6B35,#FF2D92 55%,#AF52DE); color:#fff;}
+section[id], #auction{scroll-margin-top:64px;}
+@media (max-width: 980px){
+  .tb-nav{display:none;}
+  .tb-menu{display:inline-flex;}
+}
+@media (max-width: 430px){
+  .tb-menu-txt{display:none;}
+  .tb-menu{padding:8px 9px;}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
 </style>
 </head>
 <body>
@@ -2956,12 +2992,22 @@ h1 em, h2 em, h3 em{ -webkit-box-decoration-break: clone; box-decoration-break: 
 
 <!-- ============ TOP BAR ============ -->
 <div class="topbar">
-  <div class="left"><span class="dot"></span>SONGS&nbsp;FOR&nbsp;HOPE&nbsp;·&nbsp;2026</div>
-  <div class="tb-count" data-tb-count><span class="tb-dot"></span><span data-tb-label>Doors open in</span><b data-tb-time>--</b></div>
-  <div class="right">
-    <span>Drake Underground</span>
-    <span>Toronto</span>
-  </div>
+  <a class="left" href="#hero" aria-label="Songs For Hope 2026, back to top"><span class="dot"></span>SONGS&nbsp;FOR&nbsp;HOPE&nbsp;·&nbsp;2026</a>
+  <nav class="tb-nav" aria-label="Page sections">
+    <a href="#night" data-nav="night">The Night</a>
+    <a href="#answer" data-nav="cause">The Cause</a>
+    <a href="#lineup" data-nav="lineup">Lineup</a>
+    <a href="#auction" data-nav="auction">Auction</a>
+  </nav>
+  <a class="tb-count" href="#tickets" data-tb-count aria-label="Tickets and countdown"><span class="tb-dot"></span><span data-tb-label>Doors open in</span><b data-tb-time>--</b></a>
+  <button class="tb-menu" type="button" aria-expanded="false" aria-controls="tbSheet"><span class="tb-burger" aria-hidden="true"><i></i><i></i></span><span class="tb-menu-txt">Menu</span></button>
+</div>
+<div class="tb-sheet" id="tbSheet" hidden>
+  <a href="#night">The Night</a>
+  <a href="#answer">The Cause</a>
+  <a href="#lineup">Lineup</a>
+  <a href="#auction">Auction</a>
+  <a class="tb-sheet-cta" href="#tickets">Tickets &amp; donations</a>
 </div>
 
 <!-- (track nav removed for cleaner reading flow) -->
@@ -3964,6 +4010,31 @@ document.addEventListener('click', function(e){
   if ('IntersectionObserver' in window){
     new IntersectionObserver(function(e, obs){ if (e[0].isIntersecting){ load(); obs.disconnect(); } }, {rootMargin: '900px 0px'}).observe(AUC);
   } else { load(); }
+})();
+</script>
+
+<script>
+(function(){
+  // Section nav: highlight the section you're in; mobile menu sheet
+  var nav = document.querySelector('.tb-nav'); if (!nav) return;
+  var links = {night: nav.querySelector('[data-nav="night"]'), cause: nav.querySelector('[data-nav="cause"]'), lineup: nav.querySelector('[data-nav="lineup"]'), auction: nav.querySelector('[data-nav="auction"]')};
+  var ranges = [['night','night','answer'], ['cause','answer','lineup'], ['lineup','lineup','sponsors'], ['auction','tickets', null]];
+  function top(id){ var el = document.getElementById(id); return el ? el.getBoundingClientRect().top + window.scrollY : Infinity; }
+  function mark(){
+    var y = window.scrollY + window.innerHeight * 0.35, cur = null;
+    ranges.forEach(function(r){ var a = top(r[1]), b = r[2] ? top(r[2]) : Infinity; if (y >= a && y < b) cur = r[0]; });
+    Object.keys(links).forEach(function(k){ if (links[k]) links[k].classList.toggle('is-active', k === cur); });
+  }
+  window.addEventListener('scroll', mark, {passive:true}); window.addEventListener('resize', mark); mark();
+  var btn = document.querySelector('.tb-menu'), sheet = document.getElementById('tbSheet');
+  if (!btn || !sheet) return;
+  function setOpen(o){ btn.setAttribute('aria-expanded', o ? 'true' : 'false'); sheet.hidden = !o; }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(sheet.hidden); });
+  sheet.addEventListener('click', function(e){ if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('click', function(e){ if (!sheet.hidden && !sheet.contains(e.target) && e.target !== btn) setOpen(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('scroll', function(){ if (!sheet.hidden && Math.abs(window.scrollY - (window.__sheetY||0)) > 120) setOpen(false); }, {passive:true});
+  btn.addEventListener('click', function(){ window.__sheetY = window.scrollY; });
 })();
 </script>
 </body>
