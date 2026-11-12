@@ -2,23 +2,39 @@
 <html lang="en">
 <head>
 <script>
-// Disable browser's scroll restoration and any stale hash navigation BEFORE the browser scrolls anywhere.
+// Initial scroll position. Default: top of page. Deep links (?go=press or #press) land on that section.
 (function(){
+  var MAP = { tickets:'tickets', auction:'auction', press:'press', cp24:'press', video:'press',
+              donate:'tickets', night:'night', answer:'answer', lineup:'lineup' };
+  var target = null;
   try {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    // Strip any stale hash on initial load so the browser does not auto-scroll to a section.
-    if (location.hash) {
-      history.replaceState(null, '', location.pathname + location.search);
-    }
+    var key = (new URLSearchParams(location.search).get('go') || location.hash.slice(1) || '').toLowerCase();
+    if (MAP[key]) target = MAP[key];
+    // Strip the hash so the browser's own jump doesn't fight ours.
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   } catch(e) {}
-  // Belt-and-suspenders: scroll to top at multiple lifecycle points.
-  var stickTop = function(){ window.scrollTo(0, 0); };
-  stickTop();
-  document.addEventListener('DOMContentLoaded', stickTop, { once: true });
+  var userMoved = false;
+  ['wheel','touchmove','keydown'].forEach(function(ev){
+    window.addEventListener(ev, function(){ userMoved = true; }, { passive: true, once: true });
+  });
+  var place = function(){
+    if (userMoved) return;
+    var y = 0;
+    if (target) {
+      var el = document.getElementById(target);
+      if (!el) return;
+      y = el.getBoundingClientRect().top + window.pageYOffset;
+    }
+    window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+  };
+  place();
+  document.addEventListener('DOMContentLoaded', place, { once: true });
   window.addEventListener('load', function(){
-    stickTop();
-    // One more after layout settles (fonts/images).
-    setTimeout(stickTop, 50);
+    place();
+    // Re-settle after fonts/images shift the layout.
+    setTimeout(place, 60);
+    if (target) { setTimeout(place, 400); setTimeout(place, 1000); }
   });
 })();
 </script>
